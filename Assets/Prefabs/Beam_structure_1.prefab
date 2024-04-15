@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3269331905544634832}
   - component: {fileID: 2343108079356889961}
   - component: {fileID: 1288105049509908250}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: beam (1)
-  m_TagString: Untagged
+  m_TagString: Obstruction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,9 +141,9 @@ GameObject:
   - component: {fileID: 5429554481111967717}
   - component: {fileID: 3989319458168044331}
   - component: {fileID: 2976730031768802034}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: beam (2)
-  m_TagString: Untagged
+  m_TagString: Obstruction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,9 +269,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5945693530332634111}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Beam_structure_1
-  m_TagString: Untagged
+  m_TagString: Obstruction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -306,9 +306,9 @@ GameObject:
   - component: {fileID: 6040008871762197915}
   - component: {fileID: 2993204471937067920}
   - component: {fileID: 655595183275273157}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: beam (3)
-  m_TagString: Untagged
+  m_TagString: Obstruction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -436,9 +436,9 @@ GameObject:
   - component: {fileID: 7013763361007244331}
   - component: {fileID: 5344854910908961045}
   - component: {fileID: 7675374096992597156}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: beam
-  m_TagString: Untagged
+  m_TagString: Obstruction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

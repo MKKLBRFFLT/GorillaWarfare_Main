@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1962202187846851389}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 844129632004367899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6189, y: 0.0014, z: 0}
+  m_LocalPosition: {x: -2.6189, y: 0.0014, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3266522992227122271}
   - component: {fileID: 7005087157313808623}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4934369352962109023}
   - component: {fileID: 3209031023193532854}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4559082401860565299}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Turret_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 3235974160543556181}
   - component: {fileID: 2827349187225609851}
   - component: {fileID: 8610823792628287022}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7936432582163104080, guid: 2c2923f4112869b4999ac42364ab8310, type: 3}
   playerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128

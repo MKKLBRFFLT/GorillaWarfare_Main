@@ -5,7 +5,7 @@ using UnityEngine;
 public class Robot : MonoBehaviour
 {
     [SerializeField]
-    private bool isFlipped;
+    public bool isFlipped;
     private Transform characterTransform;
 
     // Start is called before the first frame update

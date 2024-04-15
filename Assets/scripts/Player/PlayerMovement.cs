@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 7f;
 
+    PlayerHealth healthScript;
+
 
 
     private enum MovementState { idle, run, jump, fall, crouch }
@@ -34,41 +36,36 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         characterTransform = GetComponent<Transform>();
+        healthScript = transform.Find("Target").GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-
-        if (Input.GetButtonDown("Jump"))
+        if (!healthScript.isDead)
         {
-            if (IsGrounded())
-            {
+            dirX = Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (IsGrounded())
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                }
             }
 
+            if (Input.GetButtonDown("Fire1") & IsGrounded())
+            {
+                isCrouched = true;
+            }
+            else if (Input.GetButtonUp("Fire1"))
+            {
+                isCrouched = false;
+            }
+
+            UpdateAnimationState();
         }
-
-        if (Input.GetButtonDown("Fire1") & IsGrounded())
-        {
-            isCrouched = true;
-        }
-        else if (Input.GetButtonUp("Fire1"))
-        {
-            isCrouched = false;
-        }
-
-
-
-
-
-
-        UpdateAnimationState();
-
-
     }
     
     private void UpdateAnimationState()

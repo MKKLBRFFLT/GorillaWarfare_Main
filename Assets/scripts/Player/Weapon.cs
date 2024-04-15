@@ -7,13 +7,32 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public GameObject shotPrefab;
     [SerializeField] private AudioSource audioPlayer;
+    bool playerIsDead;
     [SerializeField] private float fireRate;
     private float nextFire;
 
+    #region Event Subscribtions
+    
+    void OnEnable()
+    {
+        PlayerHealth.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+    void OnDisable()
+    {
+        PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
+    #endregion
+
+    void Start()
+    {
+        playerIsDead = false;
+    }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && !playerIsDead)
         {
             Shoot();
         }
@@ -30,4 +49,13 @@ public class Weapon : MonoBehaviour
         }
         
     }
+
+    #region Subribtion Handlers
+
+    void HandlePlayerDeath()
+    {
+        playerIsDead = true;
+    }
+
+    #endregion
 }

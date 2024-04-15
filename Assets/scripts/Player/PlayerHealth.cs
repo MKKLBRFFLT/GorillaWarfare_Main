@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Bools")]
     public bool cooldown;
+    public bool isDead;
     [SerializeField] bool invinsible = false;
 
     #endregion
@@ -52,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
         // print("Player has " + health + " health");
 
         cooldown = false;
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -71,6 +73,7 @@ public class PlayerHealth : MonoBehaviour
             // print("Player is dead");
             
             Time.timeScale = 0;
+            isDead = true;
             OnPlayerDeath?.Invoke();
         }
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5456502557459582387}
   - component: {fileID: 7757201040820456860}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: TopPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7414459468128439914}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Hover_platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,10 +124,9 @@ GameObject:
   - component: {fileID: 1824011543837248779}
   - component: {fileID: 5871745068345867432}
   - component: {fileID: 4190149379319627058}
-  - component: {fileID: 5362537463137265648}
   - component: {fileID: 2314664796969532546}
   - component: {fileID: 8743527012627346995}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,47 +227,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!68 &5362537463137265648
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4903217031117332576}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -118.19501, y: 0.2500019}
-  - {x: 124.93834, y: 0.47780105}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!114 &2314664796969532546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828322453026111039}
   - component: {fileID: 5623380797327882814}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: BottomPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -368,7 +326,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5331251159063820855}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -416,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5179749708408312546}
   - component: {fileID: 2141525822499590426}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: LeftPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -493,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6648514511992093930}
   - component: {fileID: 1456018470024016456}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: RightPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}

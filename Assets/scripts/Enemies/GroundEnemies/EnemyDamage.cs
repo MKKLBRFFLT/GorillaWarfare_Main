@@ -26,16 +26,16 @@ public class EnemyDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cooldown = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().cooldown;
+        cooldown = GameObject.FindWithTag("Player").transform.Find("Target").GetComponent<PlayerHealth>().cooldown;
     }
 
     #endregion
 
     #region Methods
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnCollisionStay2D(Collision2D coll)
     {
-        if (coll.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
+        if (coll.gameObject.CompareTag("Player") && coll.gameObject.transform.Find("Target").TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
         {
             playerComp.TakeDamage(damage);
             cooldown = true;

@@ -9,6 +9,8 @@ TagManager:
   - PlayerCamPos
   - BulletPrefabFolder
   - Target
+  - Obstruction
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Background
   - Terrain
   - Player
-  - 
+  - Enemies
   - 
   - 
   - 
