@@ -88,7 +88,7 @@ public class EnemyTrackAndMovement : MonoBehaviour
 
     #endregion
 
-    #region  Methods
+    #region Methods
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -98,9 +98,13 @@ public class EnemyTrackAndMovement : MonoBehaviour
         }
     }
 
-    #endregion
-
-    #region FindTargetMethods
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Obstruction"))
+        {
+            StartCoroutine(CheckDirection());
+        }
+    }
 
     void FindTarget()
     {
@@ -139,6 +143,13 @@ public class EnemyTrackAndMovement : MonoBehaviour
         }
         // print("Target not obstructed");
         return false;
+    }
+
+    IEnumerator CheckDirection()
+    {
+        yield return new WaitForSeconds(2);
+
+        isGoingRight = !isGoingRight;
     }
 
     #endregion
