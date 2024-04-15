@@ -17,6 +17,7 @@ public class TurretTrackAndShoot : MonoBehaviour
     [Header("Bools")]
     bool shooting;
     bool tracking;
+
     [SerializeField] bool isLookingLeft = true;
     [SerializeField] bool isOmniDirectional = false;
 
@@ -50,7 +51,7 @@ public class TurretTrackAndShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player").transform.Find("Target");
         BulletPrefabs = GameObject.FindWithTag("BulletPrefabFolder");
 
         if (isOmniDirectional)
@@ -242,8 +243,9 @@ public class TurretTrackAndShoot : MonoBehaviour
         // print("Bang!");
 
         GameObject bulletCopy = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity, BulletPrefabs.transform);
-        bulletCopy.GetComponent<Rigidbody2D>().AddForce(firePoint.up * shootForce, ForceMode2D.Impulse);
+        bulletCopy.GetComponent<Rigidbody2D>().AddForce(-firePoint.right * shootForce, ForceMode2D.Impulse);
         bulletCopy.transform.rotation = transform.rotation * Quaternion.Euler(new Vector3(0,0,90));
+        bulletCopy.transform.localPosition += new Vector3(0f, 0f, -4f);
     }
 
     #endregion

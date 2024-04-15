@@ -43,7 +43,7 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cooldown = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().cooldown;
+        cooldown = GameObject.FindWithTag("Player").transform.Find("Target").GetComponent<PlayerHealth>().cooldown;
     }
 
     #endregion
@@ -52,7 +52,7 @@ public class BulletScript : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
+        if (coll.gameObject.transform.Find("Target").TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
         {
             playerComp.TakeDamage(damage);
             OnDamage?.Invoke();
