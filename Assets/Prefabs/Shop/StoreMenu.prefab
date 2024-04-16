@@ -1128,8 +1128,8 @@ MonoBehaviour:
   SFXVolume: 0
   masterVolume: 0
   realVolume: 0
-  InitialAudioSourcePoolSize: 10
   storeOpen: 0
+  InitialAudioSourcePoolSize: 10
   currencyText: {fileID: 5631293801220458253}
   shopItemsSO: []
   shopPannels: []
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   purchaseShopButtons: []
   contents: {fileID: 2946435362711095181}
   audioBuy: {fileID: 0}
-  audioMixer: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 888d1919401d2a54390bfd5b92083571, type: 2}
 --- !u!1 &7077649654107175014
 GameObject:
   m_ObjectHideFlags: 0
