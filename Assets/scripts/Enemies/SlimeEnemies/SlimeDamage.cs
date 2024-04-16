@@ -26,7 +26,7 @@ public class SlimeDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cooldown = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().cooldown;
+        cooldown = GameObject.FindWithTag("Target").GetComponent<PlayerHealth>().cooldown;
     }
 
     #endregion
@@ -35,7 +35,7 @@ public class SlimeDamage : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
+        if (coll.gameObject.transform.Find("Target") && coll.gameObject.transform.Find("Target").TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
         {
             playerComp.TakeDamage(damage);
             cooldown = true;

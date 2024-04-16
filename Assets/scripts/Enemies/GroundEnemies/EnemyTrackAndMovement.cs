@@ -27,7 +27,6 @@ public class EnemyTrackAndMovement : MonoBehaviour
     [SerializeField] LayerMask obstructionMask;
 
     [Header("Components")]
-    Rigidbody2D rb;
     Robot robot;
 
     #endregion
@@ -37,7 +36,6 @@ public class EnemyTrackAndMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player").transform.Find("Target").gameObject;
         robot = GetComponent<Robot>();
     }

@@ -16,7 +16,6 @@ public class SlimeTrackAndMovement : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] bool isGoingRight = true;
-    public bool targetIsInArea;
     public bool targetInRange;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isJumping;
@@ -24,13 +23,13 @@ public class SlimeTrackAndMovement : MonoBehaviour
 
     [Header("GameObjects")]
     GameObject player;
-    [SerializeField] GameObject targetTracker;
     
     [Header("Transforms")]
     [SerializeField] Transform target;
 
     [Header("LayerMasks")]
     [SerializeField] LayerMask playerMask;
+    [SerializeField] LayerMask obstructionMask;
 
     [Header("Components")]
     Rigidbody2D rb;
@@ -45,14 +44,12 @@ public class SlimeTrackAndMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
 
-        targetIsInArea = false;
         isJumping = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        targetIsInArea = targetTracker.GetComponent<SlimeTrackTarget>().targetIsInArea;
         targetInRange = TargetInRange();
 
         moveSpeed = isGoingRight ? baseSpeed : -baseSpeed;
@@ -76,7 +73,7 @@ public class SlimeTrackAndMovement : MonoBehaviour
             moveSpeed = playerIsRight ? baseSpeed : -baseSpeed;
         }
 
-        if (!TargetInRange() || !targetIsInArea)
+        if (!TargetInRange() || !IsObstructed())
         {
             target = null;
         }
@@ -90,7 +87,7 @@ public class SlimeTrackAndMovement : MonoBehaviour
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, (Vector2) transform.position, 0f, playerMask);
 
-        if ((hits.Length > 0) && TargetInRange() && targetIsInArea)
+        if ((hits.Length > 0) && TargetInRange() && !IsObstructed())
         {
             if (hits[0].transform.CompareTag("Player"))
             {
@@ -109,6 +106,19 @@ public class SlimeTrackAndMovement : MonoBehaviour
         {
             return true;
         }
+        return false;
+    }
+
+    bool IsObstructed()
+    {
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position, obstructionMask);
+
+        if (hit)
+        {
+            // print("Target obstructed");
+            return true;
+        }
+        // print("Target not obstructed");
         return false;
     }
 
@@ -146,7 +156,7 @@ public class SlimeTrackAndMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Wall"))
+        if (collision.transform.CompareTag("Obstruction"))
         {
             isGoingRight = !isGoingRight;
         }
@@ -154,7 +164,7 @@ public class SlimeTrackAndMovement : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Ground"))
+        if (collision.transform.CompareTag("Ground") || collision.transform.CompareTag("Obstruction"))
         {
             isGrounded = true;
         }

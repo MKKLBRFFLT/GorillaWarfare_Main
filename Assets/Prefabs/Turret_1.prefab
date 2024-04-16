@@ -444,7 +444,7 @@ MonoBehaviour:
   firerate: 0.1
   cooldown: 2
   viewAngle: 135
-  isLookingLeft: 1
+  isLookingRight: 0
   isOmniDirectional: 0
   obstructed: 0
   inRange: 0
@@ -456,4 +456,4 @@ MonoBehaviour:
     m_Bits: 256
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 136
