@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2670576891660999406}
   - component: {fileID: 3548952409466601145}
   - component: {fileID: 1192679682336903759}
+  - component: {fileID: 3933651241724140354}
   m_Layer: 8
   m_Name: Target
   m_TagString: Target
@@ -64,6 +65,23 @@ MonoBehaviour:
   cooldown: 0
   isDead: 0
   invinsible: 0
+--- !u!114 &3933651241724140354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523912079603244758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580ad54de8a84ec4d996acf186631d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numFound: 0
+  promtFound: 0
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &3367983988213397711
 GameObject:
   m_ObjectHideFlags: 0

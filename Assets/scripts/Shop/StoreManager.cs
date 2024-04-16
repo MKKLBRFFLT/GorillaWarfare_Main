@@ -62,6 +62,11 @@ public class StoreManager : MonoBehaviour
     {
         currency = GameObject.FindWithTag("Managers").GetComponent<UIManager>().bananaAmount;
         
+        if (Input.GetKeyDown(KeyCode.Escape) && storeOpen)
+        {
+            CloseStore();
+        }
+        
         if (!pannelsLoaded)
         {
             LoadShopPannels();

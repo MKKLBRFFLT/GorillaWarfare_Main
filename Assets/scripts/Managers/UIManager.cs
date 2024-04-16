@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     [Header("TMPs")]
     TMP_Text bananaText;
     TMP_Text specialAmmoText;
+    TMP_Text prompt;
 
     [Header("GameObjects")]
     GameObject canvas;
@@ -36,10 +37,12 @@ public class UIManager : MonoBehaviour
     GameObject ammoObj;
     GameObject specialAmmoObj;
     GameObject deathMsgObj;
+    GameObject promtText;
     
     [Header("Transforms")]
     Transform ammoFront;
     Transform ammoBack;
+    Transform player;
 
     [Header("Images")]
     Image healthImg1;
@@ -89,10 +92,11 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bananaAmount = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().bananaAmount;
-        health = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerHealth>().health;
-        specialAmmo = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().specialAmmo;
-        aState = (AmmoState)GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().aState;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        bananaAmount = player.Find("Target").GetComponent<PlayerCounts>().bananaAmount;
+        health = player.Find("Target").GetComponent<PlayerHealth>().health;
+        specialAmmo = player.Find("Target").GetComponent<PlayerCounts>().specialAmmo;
+        aState = (AmmoState)player.Find("Target").GetComponent<PlayerCounts>().aState;
 
         if (elementsFound)
         {
@@ -100,6 +104,7 @@ public class UIManager : MonoBehaviour
             UpdateHealthBar();
             UpdateSpecialAmmo();
             UpdateAmmoType();
+            UpdatePromt();
         }
     }
 
@@ -128,6 +133,8 @@ public class UIManager : MonoBehaviour
         ammoObjDistance = Vector3.Distance(ammoBack.position, ammoFront.position);
 
         deathMsgObj = canvas.transform.Find("UIMenus/DeathMsgPanel").gameObject;
+        promtText = canvas.transform.Find("UIElements/PromtText (TMP)").gameObject;
+        
         deathMsgObj.SetActive(false);
 
         elementsFound = true;
@@ -199,6 +206,19 @@ public class UIManager : MonoBehaviour
                 StopCoroutine(nameof(AmmoToFront));
                 StartCoroutine(AmmoToBack());
                 break;
+        }
+    }
+
+    void UpdatePromt()
+    {
+        if (player.GetComponentInChildren<Interactor>().promtFound)
+        {
+            promtText.SetActive(true);
+            promtText.GetComponent<TMP_Text>().text = $"{player.GetComponentInChildren<Interactor>().colliders[0].GetComponent<IInteractable>().promt}";
+        }
+        else
+        {
+            promtText.SetActive(false);
         }
     }
 
