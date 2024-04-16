@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] AmmoState aState;
     
     [Header("Ints")]
-    int bananaAmount;
+    public int bananaAmount;
     int health;
     int specialAmmo;
 

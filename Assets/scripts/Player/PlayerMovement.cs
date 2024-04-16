@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
 
     private bool isCrouched;
-    bool moveBool;
+    public bool moveBool;
 
     private float dirX = 0f;
 
