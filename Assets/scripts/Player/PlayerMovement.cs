@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public bool moveBool;
     private bool aimUp;
     private bool aimDown;
+    [SerializeField] bool grounded;
 
     private float dirX = 0f;
 
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private enum MovementState { idle, run, jump, fall, crouch, death, aim_up, aim_down }
-    //                          0     1    2     3     4
+    //                           0     1    2     3     4
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
 
             UpdateAnimationState();
         }
+
+        grounded = IsGrounded();
     }
     
     private void UpdateAnimationState()
