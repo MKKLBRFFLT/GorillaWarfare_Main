@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5456502557459582387}
   - component: {fileID: 7757201040820456860}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: TopPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -297,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828322453026111039}
   - component: {fileID: 5623380797327882814}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: BottomPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -374,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5179749708408312546}
   - component: {fileID: 2141525822499590426}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -451,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6648514511992093930}
   - component: {fileID: 1456018470024016456}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightPoint
   m_TagString: MovePoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}

@@ -11,6 +11,8 @@ TagManager:
   - Target
   - Obstruction
   - Enemy
+  - MainUI
+  - Managers
   layers:
   - Default
   - TransparentFX

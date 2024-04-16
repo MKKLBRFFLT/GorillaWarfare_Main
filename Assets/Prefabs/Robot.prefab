@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6374618421446059322}
   - component: {fileID: 7516841904693023838}
   - component: {fileID: 4433919567404327220}
+  - component: {fileID: 702384178217885103}
   m_Layer: 9
   m_Name: Robot
   m_TagString: Enemy
@@ -396,3 +397,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40175d452cfc44d4cb94efa9d5075659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &702384178217885103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255306474130985711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a432cbf9472c654fa97c243b14903c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  banana: {fileID: 8959531023753936155, guid: 962d3bcd26ec97d419374b6769952857, type: 3}

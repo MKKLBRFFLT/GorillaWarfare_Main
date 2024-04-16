@@ -52,7 +52,7 @@ public class BulletScript : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.transform.Find("Target").TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
+        if (coll.gameObject.transform.Find("Target") && coll.gameObject.transform.Find("Target").TryGetComponent<PlayerHealth>(out PlayerHealth playerComp) && !cooldown)
         {
             playerComp.TakeDamage(damage);
             OnDamage?.Invoke();
