@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isCrouched;
     public bool moveBool;
+    private bool aimUp;
+    private bool aimDown;
 
     private float dirX = 0f;
 
@@ -37,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
     }
 
-    private enum MovementState { idle, run, jump, fall, crouch }
-    //                           0     1    2     3     4
+    private enum MovementState { idle, run, jump, fall, crouch, death, aim_up, aim_down }
+    //                          0     1    2     3     4
 
     // Start is called before the first frame update
     void Start()
@@ -96,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.run;
             characterTransform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
-        else if (isCrouched & IsGrounded())
+        else if (isCrouched)
         {
             state = MovementState.crouch;
         }
@@ -105,14 +107,37 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.idle;
         }
 
-        if (rb.velocity.y > .1f)
+        if (aimUp)
+        {
+            state = MovementState.aim_up;
+        }
+
+        else if (aimDown)
+        {
+            state = MovementState.aim_down;
+        }
+
+        
+
+
+
+        if (rb.velocity.y > .1f & !IsGrounded())
         {
             state = MovementState.jump;
 
         }
-        else if (rb.velocity.y < -.1f & !isCrouched)
+        else if ((rb.velocity.y < -.1f & !isCrouched) & !IsGrounded())
         {
             state = MovementState.fall;
+        }
+
+
+        
+
+
+        if (healthScript.isDead)
+        {
+            state = MovementState.death;
         }
 
 
@@ -121,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.4f, jumpableGround);
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0.1f, Vector2.down, 0.01f, jumpableGround);
     }
 
     void HandleStartGame()
