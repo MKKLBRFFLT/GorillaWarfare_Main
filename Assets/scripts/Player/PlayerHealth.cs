@@ -54,6 +54,8 @@ public class PlayerHealth : MonoBehaviour
 
         cooldown = false;
         isDead = false;
+
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame

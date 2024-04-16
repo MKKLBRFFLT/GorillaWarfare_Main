@@ -73,18 +73,26 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CameraManager camManager = GameObject.FindWithTag("Managers").GetComponent<CameraManager>();
         canvas = GameObject.FindGameObjectWithTag("MainUI");
-        canvas.SetActive(false);
-        elementsFound = false;
+        
+        if (camManager.isActiveAndEnabled)
+        {
+            canvas.SetActive(false);
+        }
+        else
+        {
+            FindElements();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        bananaAmount = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCounts>().bananaAmount;
-        health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().health;
-        specialAmmo = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCounts>().specialAmmo;
-        aState = (AmmoState)GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCounts>().aState;
+        bananaAmount = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().bananaAmount;
+        health = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerHealth>().health;
+        specialAmmo = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().specialAmmo;
+        aState = (AmmoState)GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().aState;
 
         if (elementsFound)
         {
@@ -101,7 +109,7 @@ public class UIManager : MonoBehaviour
 
     void FindElements()
     {
-        bananaText = canvas.transform.Find("UIElements/BananasText (TMP)").GetComponent<TextMeshProUGUI>();
+        bananaText = canvas.transform.Find("UIElements/Bananas/BananasText (TMP)").GetComponent<TextMeshProUGUI>();
         specialAmmoText = canvas.transform.Find("UIElements/Ammo/SpecialAmmo/SpecialAmmo (TMP)").GetComponent<TextMeshProUGUI>();
 
         health1Obj = canvas.transform.Find("UIElements/Health/Health 1").gameObject;
@@ -140,7 +148,7 @@ public class UIManager : MonoBehaviour
 
     void UpdateBananaText()
     {
-        bananaText.text = $"Bananas: {bananaAmount}";
+        bananaText.text = $"{bananaAmount}";
     }
 
     void UpdateHealthBar()

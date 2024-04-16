@@ -19,6 +19,15 @@ public class Shot : MonoBehaviour
         Debug.Log(hitInfo.name);
 
         Instantiate(impactEffect, transform.position, transform.rotation);
+
+        if (hitInfo.TryGetComponent<TurretHealth>(out TurretHealth tComp))
+        {
+            tComp.TakeDamage(1);
+        }
+        if (hitInfo.TryGetComponent<RobotHealth>(out RobotHealth rComp))
+        {
+            rComp.TakeDamage(1);
+        }
         
 
         Destroy(gameObject);

@@ -17,9 +17,11 @@ public class TurretTrackAndShoot : MonoBehaviour
     [Header("Bools")]
     bool shooting;
     bool tracking;
-
     [SerializeField] bool isLookingLeft = true;
     [SerializeField] bool isOmniDirectional = false;
+    [SerializeField] bool obstructed;
+    [SerializeField] bool inRange;
+    [SerializeField] bool inAngle;
 
     [Header("Vector3s")]
     Vector3 FoVPointA;
@@ -77,6 +79,10 @@ public class TurretTrackAndShoot : MonoBehaviour
         // Fov Triangle
         FoVPointA = transform.position + topAngle * (range + range * 1.6f);
         FoVPointB = transform.position + bottomAngle * (range + range * 1.6f);
+
+        obstructed = IsObstructed();
+        inRange = TargetInRange();
+        inAngle = TargetWithinAngle();
 
         if (!target && !shooting)
         {
