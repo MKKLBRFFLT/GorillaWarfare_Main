@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
 
     private bool isCrouched;
+    bool moveBool;
 
     private float dirX = 0f;
 
@@ -24,7 +25,17 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerHealth healthScript;
 
+    void OnEnable()
+    {
+        CameraManager.OnPlayerFastCamActive += HandleStartGame;
+        PlayerHealth.OnPlayerDeath += HandlePlayerDeath;
+    }
 
+    void OnDisable()
+    {
+        CameraManager.OnPlayerFastCamActive -= HandleStartGame;
+        PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
+    }
 
     private enum MovementState { idle, run, jump, fall, crouch }
     //                           0     1    2     3     4
@@ -37,12 +48,16 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         characterTransform = GetComponent<Transform>();
         healthScript = transform.Find("Target").GetComponent<PlayerHealth>();
+
+        UpdateAnimationState();
+
+        moveBool = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!healthScript.isDead)
+        if (moveBool)
         {
             dirX = Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
@@ -107,5 +122,15 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.4f, jumpableGround);
+    }
+
+    void HandleStartGame()
+    {
+        moveBool = true;
+    }
+
+    void HandlePlayerDeath()
+    {
+        moveBool = false;
     }
 }
