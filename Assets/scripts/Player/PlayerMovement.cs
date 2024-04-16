@@ -16,8 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
 
     private bool isCrouched;
+    private bool aimUp;
+    private bool aimDown;
 
     private float dirX = 0f;
+    private float dirY = 0f;
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 7f;
@@ -25,9 +28,8 @@ public class PlayerMovement : MonoBehaviour
     PlayerHealth healthScript;
 
 
-
-    private enum MovementState { idle, run, jump, fall, crouch }
-    //                           0     1    2     3     4
+    private enum MovementState { idle, run, jump, fall, crouch, death, aim_up, aim_down }
+    //                           0     1    2     3     4       5      6       7
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         if (!healthScript.isDead)
         {
             dirX = Input.GetAxisRaw("Horizontal");
+            dirY = Input.GetAxisRaw("Vertical");
             rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
             if (Input.GetButtonDown("Jump"))
@@ -55,13 +58,35 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonDown("Fire1") & IsGrounded())
+            
+
+
+            if (Input.GetButtonDown("Fire3") & IsGrounded())
             {
                 isCrouched = true;
             }
-            else if (Input.GetButtonUp("Fire1"))
+            else if (Input.GetButtonUp("Fire3"))
             {
                 isCrouched = false;
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                aimUp = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                aimUp = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                aimDown = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                aimDown = false;
             }
 
             UpdateAnimationState();
@@ -81,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.run;
             characterTransform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
-        else if (isCrouched & IsGrounded())
+        else if (isCrouched)
         {
             state = MovementState.crouch;
         }
@@ -90,14 +115,37 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.idle;
         }
 
-        if (rb.velocity.y > .1f)
+        if (aimUp)
+        {
+            state = MovementState.aim_up;
+        }
+
+        else if (aimDown)
+        {
+            state = MovementState.aim_down;
+        }
+
+        
+
+
+
+        if (rb.velocity.y > .1f & !IsGrounded())
         {
             state = MovementState.jump;
 
         }
-        else if (rb.velocity.y < -.1f & !isCrouched)
+        else if ((rb.velocity.y < -.1f & !isCrouched) & !IsGrounded())
         {
             state = MovementState.fall;
+        }
+
+
+        
+
+
+        if (healthScript.isDead)
+        {
+            state = MovementState.death;
         }
 
 
@@ -106,6 +154,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.4f, jumpableGround);
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0.1f, Vector2.down, 0.01f, jumpableGround);
     }
 }
