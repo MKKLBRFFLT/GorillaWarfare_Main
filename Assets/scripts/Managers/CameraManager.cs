@@ -59,7 +59,9 @@ public class CameraManager : MonoBehaviour
         }
         if (playerFastCamBool)
         {
-            mainCam.transform.position = new Vector3(player.transform.position.x, 0f, -10f);
+            float playerPos = player.transform.position.x;
+            playerPos = Mathf.Clamp(playerPos, -5f, 500);
+            mainCam.transform.position = new Vector3(playerPos, 0f, -10f);
         }
     }
     
