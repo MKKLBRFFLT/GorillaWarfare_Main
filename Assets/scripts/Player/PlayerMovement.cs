@@ -50,11 +50,14 @@ public class PlayerMovement : MonoBehaviour
             dirY = Input.GetAxisRaw("Vertical");
             rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
-            if (Input.GetButtonDown("Jump"))
+            if (IsGrounded())
+            {
+                if (Input.GetButtonDown("Jump"))
             {
                 if (IsGrounded())
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    StandUp(); 
                 }
             }
 
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W))
             {
                 aimUp = true;
+                aimDown = false;
             }
             else if (Input.GetKeyUp(KeyCode.W))
             {
@@ -83,11 +87,21 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.S))
             {
                 aimDown = true;
+                aimUp = false;
             }
             else if (Input.GetKeyUp(KeyCode.S))
             {
                 aimDown = false;
             }
+            }
+
+            if (Mathf.Abs(rb.velocity.x) > 0.01f)
+            {
+                StandUp();    
+            }
+
+            
+            
 
             UpdateAnimationState();
         }
@@ -110,12 +124,7 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.crouch;
         }
-        else
-        {
-            state = MovementState.idle;
-        }
-
-        if (aimUp)
+        else if (aimUp)
         {
             state = MovementState.aim_up;
         }
@@ -124,6 +133,12 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.aim_down;
         }
+        else
+        {
+            state = MovementState.idle;
+        }
+
+        
 
         
 
@@ -155,5 +170,12 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0.1f, Vector2.down, 0.01f, jumpableGround);
+    }
+
+    private void StandUp()
+    {
+        isCrouched = false;
+        aimUp = false;
+        aimDown = false;
     }
 }
