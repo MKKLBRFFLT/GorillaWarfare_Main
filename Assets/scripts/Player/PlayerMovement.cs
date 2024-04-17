@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateAnimationState();
 
-        moveBool = false;
+        moveBool = true;
     }
 
     // Update is called once per frame
@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (IsGrounded())
                 {
+                    StandUp();
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 }
             }
@@ -82,6 +83,24 @@ public class PlayerMovement : MonoBehaviour
                 isCrouched = false;
             }
 
+            if (Input.GetKeyDown(KeyCode.W) & (dirX == 0))
+            {
+                aimUp = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                aimUp = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.S) & (dirX == 0))
+            {
+                aimDown = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                aimDown = false;
+            }
+
             UpdateAnimationState();
         }
 
@@ -93,11 +112,13 @@ public class PlayerMovement : MonoBehaviour
         MovementState state;
         if (dirX > 0f)
         {
+            StandUp();
             state = MovementState.run;
             characterTransform.rotation = Quaternion.identity;
         }
         else if (dirX < 0f)
         {
+            StandUp();
             state = MovementState.run;
             characterTransform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
@@ -126,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb.velocity.y > .1f & !IsGrounded())
         {
+
             state = MovementState.jump;
 
         }
@@ -150,6 +172,13 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0.1f, Vector2.down, 0.01f, jumpableGround);
+    }
+
+    private void StandUp()
+    {
+        isCrouched = false;
+        aimUp = false;
+        aimDown = false;
     }
 
     void HandleStartGame()
