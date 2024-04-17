@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2670576891660999406}
   - component: {fileID: 3548952409466601145}
   - component: {fileID: 1192679682336903759}
+  - component: {fileID: 3933651241724140354}
   m_Layer: 8
   m_Name: Target
   m_TagString: Target
@@ -62,7 +63,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   cooldown: 0
+  isDead: 0
   invinsible: 0
+--- !u!114 &3933651241724140354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523912079603244758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580ad54de8a84ec4d996acf186631d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numFound: 0
+  promtFound: 0
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &3367983988213397711
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +123,7 @@ AudioSource:
   m_GameObject: {fileID: 3367983988213397711}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7299489207075989560, guid: 888d1919401d2a54390bfd5b92083571, type: 2}
   m_audioClip: {fileID: 8300000, guid: f904bf59515ba104ea2deaffdb732cb9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.291
@@ -722,7 +741,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.69, y: 15.504864}
+  m_Size: {x: 10.69, y: 15.7}
   m_EdgeRadius: 0
 --- !u!50 &6167275958955556859
 Rigidbody2D:
@@ -766,6 +785,8 @@ MonoBehaviour:
   jumpableGround:
     serializedVersion: 2
     m_Bits: 136
+  moveBool: 0
+  grounded: 0
   moveSpeed: 4
   jumpForce: 10
 --- !u!4 &3934827604296747707 stripped

@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3960054229148133666}
   - component: {fileID: 757967793047154065}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: ruin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

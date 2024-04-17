@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] AmmoState aState;
     
     [Header("Ints")]
-    int bananaAmount;
+    public int bananaAmount;
     int health;
     int specialAmmo;
 
@@ -27,6 +28,15 @@ public class UIManager : MonoBehaviour
     [Header("TMPs")]
     TMP_Text bananaText;
     TMP_Text specialAmmoText;
+    TMP_Text prompt;
+    TMP_Text masterVolumeText;
+    TMP_Text musicVolumeText;
+    TMP_Text sfxVolumeText;
+
+    [Header("Sliders")]
+    Slider masterVolumeSlider;
+    Slider musicVolumeSlider;
+    Slider sfxVolumeSlider;
 
     [Header("GameObjects")]
     GameObject canvas;
@@ -36,10 +46,13 @@ public class UIManager : MonoBehaviour
     GameObject ammoObj;
     GameObject specialAmmoObj;
     GameObject deathMsgObj;
+    GameObject promtText;
+    GameObject settingsMenu;
     
     [Header("Transforms")]
     Transform ammoFront;
     Transform ammoBack;
+    Transform player;
 
     [Header("Images")]
     Image healthImg1;
@@ -49,6 +62,9 @@ public class UIManager : MonoBehaviour
     [Header("Colors")]
     [SerializeField] Color activeColor;
     [SerializeField] Color inactiveColor;
+
+    [Header("Components")]
+    [SerializeField] AudioMixer audioMixer;
 
     #endregion
 
@@ -84,15 +100,24 @@ public class UIManager : MonoBehaviour
         {
             FindElements();
         }
+
+        settingsMenu = GameObject.FindWithTag("SettingsMenu");
+        masterVolumeText = settingsMenu.transform.Find("MasterVolumeText (TMP)/MasterText (TMP)").GetComponent<TextMeshProUGUI>();
+        musicVolumeText = settingsMenu.transform.Find("MusicVolumeText (TMP)/MusicText (TMP)").GetComponent<TextMeshProUGUI>();
+        sfxVolumeText = settingsMenu.transform.Find("SFXVolumeText (TMP)/SFXText (TMP)").GetComponent<TextMeshProUGUI>();
+
+        UpdateSliderText();
+        settingsMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        bananaAmount = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().bananaAmount;
-        health = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerHealth>().health;
-        specialAmmo = GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().specialAmmo;
-        aState = (AmmoState)GameObject.FindGameObjectWithTag("Player").transform.Find("Target").GetComponent<PlayerCounts>().aState;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        bananaAmount = player.Find("Target").GetComponent<PlayerCounts>().bananaAmount;
+        health = player.Find("Target").GetComponent<PlayerHealth>().health;
+        specialAmmo = player.Find("Target").GetComponent<PlayerCounts>().specialAmmo;
+        aState = (AmmoState)player.Find("Target").GetComponent<PlayerCounts>().aState;
 
         if (elementsFound)
         {
@@ -100,6 +125,7 @@ public class UIManager : MonoBehaviour
             UpdateHealthBar();
             UpdateSpecialAmmo();
             UpdateAmmoType();
+            UpdatePromt();
         }
     }
 
@@ -128,9 +154,36 @@ public class UIManager : MonoBehaviour
         ammoObjDistance = Vector3.Distance(ammoBack.position, ammoFront.position);
 
         deathMsgObj = canvas.transform.Find("UIMenus/DeathMsgPanel").gameObject;
+        promtText = canvas.transform.Find("UIElements/PromtText (TMP)").gameObject;
+        
         deathMsgObj.SetActive(false);
+        settingsMenu.SetActive(false);
 
         elementsFound = true;
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        audioMixer.SetFloat("masterVolume", volume);
+
+        float volumePercent = (volume + 30) * 2;
+        masterVolumeText.text = $"{volumePercent}%";
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("musicVolume", volume);
+
+        float volumePercent = (volume + 30) * 2;
+        musicVolumeText.text = $"{volumePercent}%";
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("sfxVolume", volume);
+
+        float volumePercent = (volume + 30) * 2;
+        sfxVolumeText.text = $"{volumePercent}%";
     }
 
     #endregion
@@ -200,6 +253,26 @@ public class UIManager : MonoBehaviour
                 StartCoroutine(AmmoToBack());
                 break;
         }
+    }
+
+    void UpdatePromt()
+    {
+        if (player.GetComponentInChildren<Interactor>().promtFound)
+        {
+            promtText.SetActive(true);
+            promtText.GetComponent<TMP_Text>().text = $"{player.GetComponentInChildren<Interactor>().colliders[0].GetComponent<IInteractable>().promt}";
+        }
+        else
+        {
+            promtText.SetActive(false);
+        }
+    }
+
+    void UpdateSliderText()
+    {
+        masterVolumeText.text = "60%";
+        musicVolumeText.text = "60%";
+        sfxVolumeText.text = "60%";
     }
 
     #endregion

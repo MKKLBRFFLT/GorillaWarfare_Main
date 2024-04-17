@@ -28,6 +28,10 @@ public class Shot : MonoBehaviour
         {
             rComp.TakeDamage(1);
         }
+        if (hitInfo.TryGetComponent<SlimeHealth>(out SlimeHealth sComp))
+        {
+            sComp.TakeDamage(1);
+        }
         
 
         Destroy(gameObject);

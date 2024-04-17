@@ -70,13 +70,10 @@ public class PlayerHealth : MonoBehaviour
     
     void CheckHealth()
     {
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
-            // print("Player is dead");
-            
-            Time.timeScale = 0;
+            StartCoroutine(PlayerDying());
             isDead = true;
-            OnPlayerDeath?.Invoke();
         }
     }
 
@@ -93,6 +90,14 @@ public class PlayerHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(damageCooldown);
         cooldown = false;
+    }
+
+    IEnumerator PlayerDying()
+    {
+        yield return new WaitForSeconds(2f); // Ændre "2f" til en reference af playerDeath animationens længde.
+        
+        OnPlayerDeath?.Invoke();
+        Time.timeScale = 0f;
     }
 
     #endregion

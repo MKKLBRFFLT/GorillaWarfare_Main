@@ -56,11 +56,6 @@ public class TurretTrackAndShoot : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform.Find("Target");
         BulletPrefabs = GameObject.FindWithTag("BulletPrefabFolder");
 
-        if (isOmniDirectional)
-        {
-            isLookingLeft = true;
-        }
-
         if (isLookingLeft)
         {
             topAngle = DirFromAngle(-viewAngle / 2);
@@ -246,10 +241,17 @@ public class TurretTrackAndShoot : MonoBehaviour
 
     void Shoot()
     {
-        // print("Bang!");
-
         GameObject bulletCopy = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity, BulletPrefabs.transform);
-        bulletCopy.GetComponent<Rigidbody2D>().AddForce(-firePoint.right * shootForce, ForceMode2D.Impulse);
+        
+        if (!isOmniDirectional)
+        {
+            bulletCopy.GetComponent<Rigidbody2D>().AddForce(-firePoint.right * shootForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            bulletCopy.GetComponent<Rigidbody2D>().AddForce(firePoint.up * shootForce, ForceMode2D.Impulse);
+        }
+
         bulletCopy.transform.rotation = transform.rotation * Quaternion.Euler(new Vector3(0,0,90));
         bulletCopy.transform.localPosition += new Vector3(0f, 0f, -4f);
     }

@@ -16,20 +16,32 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
 
     private bool isCrouched;
+    public bool moveBool;
     private bool aimUp;
     private bool aimDown;
+    [SerializeField] bool grounded;
 
     private float dirX = 0f;
-    private float dirY = 0f;
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 7f;
 
     PlayerHealth healthScript;
 
+    void OnEnable()
+    {
+        CameraManager.OnPlayerFastCamActive += HandleStartGame;
+        PlayerHealth.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+    void OnDisable()
+    {
+        CameraManager.OnPlayerFastCamActive -= HandleStartGame;
+        PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
+    }
 
     private enum MovementState { idle, run, jump, fall, crouch, death, aim_up, aim_down }
-    //                           0     1    2     3     4       5      6       7
+    //                           0     1    2     3     4
 
     // Start is called before the first frame update
     void Start()
@@ -39,72 +51,41 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         characterTransform = GetComponent<Transform>();
         healthScript = transform.Find("Target").GetComponent<PlayerHealth>();
+
+        UpdateAnimationState();
+
+        moveBool = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!healthScript.isDead)
+        if (moveBool)
         {
             dirX = Input.GetAxisRaw("Horizontal");
-            dirY = Input.GetAxisRaw("Vertical");
             rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
-            if (IsGrounded())
-            {
-                if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump"))
             {
                 if (IsGrounded())
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                    StandUp(); 
                 }
             }
 
-            
-
-
-            if (Input.GetButtonDown("Fire3") & IsGrounded())
+            if (Input.GetButtonDown("Fire1") & IsGrounded())
             {
                 isCrouched = true;
             }
-            else if (Input.GetButtonUp("Fire3"))
+            else if (Input.GetButtonUp("Fire1"))
             {
                 isCrouched = false;
             }
 
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                aimUp = true;
-                aimDown = false;
-            }
-            else if (Input.GetKeyUp(KeyCode.W))
-            {
-                aimUp = false;
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                aimDown = true;
-                aimUp = false;
-            }
-            else if (Input.GetKeyUp(KeyCode.S))
-            {
-                aimDown = false;
-            }
-            }
-
-            if (Mathf.Abs(rb.velocity.x) > 0.01f)
-            {
-                StandUp();    
-            }
-
-            
-            
-
             UpdateAnimationState();
         }
+
+        grounded = IsGrounded();
     }
     
     private void UpdateAnimationState()
@@ -124,7 +105,12 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.crouch;
         }
-        else if (aimUp)
+        else
+        {
+            state = MovementState.idle;
+        }
+
+        if (aimUp)
         {
             state = MovementState.aim_up;
         }
@@ -133,12 +119,6 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.aim_down;
         }
-        else
-        {
-            state = MovementState.idle;
-        }
-
-        
 
         
 
@@ -172,10 +152,13 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0.1f, Vector2.down, 0.01f, jumpableGround);
     }
 
-    private void StandUp()
+    void HandleStartGame()
     {
-        isCrouched = false;
-        aimUp = false;
-        aimDown = false;
+        moveBool = true;
+    }
+
+    void HandlePlayerDeath()
+    {
+        moveBool = false;
     }
 }
