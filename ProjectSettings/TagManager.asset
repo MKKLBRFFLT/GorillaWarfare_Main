@@ -16,6 +16,7 @@ TagManager:
   - MainMenuCamPos
   - Canvas
   - Ground
+  - SettingsMenu
   layers:
   - Default
   - TransparentFX

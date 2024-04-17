@@ -168,7 +168,7 @@ public class StoreManager : MonoBehaviour
 
     private AudioSource AddNewSourceToPool()
     {
-        audioMixer.GetFloat("SFXVolume", out float dBSFX);
+        audioMixer.GetFloat("sfxVolume", out float dBSFX);
         SFXVolume = Mathf.Pow(10.0f, dBSFX / 20.0f);
 
         audioMixer.GetFloat("masterVolume", out float dBMaster);
