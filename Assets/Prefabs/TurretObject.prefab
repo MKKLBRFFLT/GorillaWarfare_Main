@@ -103,7 +103,7 @@ MonoBehaviour:
   firerate: 0.1
   cooldown: 2
   viewAngle: 135
-  isLookingRight: 0
+  isLookingLeft: 1
   isOmniDirectional: 1
   obstructed: 0
   inRange: 0

@@ -84,9 +84,9 @@ public class StoreManager : MonoBehaviour
         else
         {
             contents.SetActive(false);
-            Time.timeScale = 1f;
             if (playerMoveStoped)
             {
+                Time.timeScale = 1f;
                 GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().moveBool = true;
                 playerMoveStoped = false;
             }
