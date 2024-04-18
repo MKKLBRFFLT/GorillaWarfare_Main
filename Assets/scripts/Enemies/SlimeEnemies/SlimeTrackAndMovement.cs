@@ -51,9 +51,8 @@ public class SlimeTrackAndMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Target");
         characterTransform = GetComponent<Transform>();
-
 
         isJumping = false;
 
@@ -63,12 +62,20 @@ public class SlimeTrackAndMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         AnimationState();
 
         targetInRange = TargetInRange();
 
-        moveSpeed = isGoingRight ? baseSpeed : -baseSpeed;
+        if (target)
+        {
+            CheckDirection();
+
+            moveSpeed = playerIsRight ? baseSpeed : -baseSpeed;
+        }
+        else
+        {
+            moveSpeed = isGoingRight ? baseSpeed : -baseSpeed;
+        }
         
         if (!isJumping && isGrounded)
         {
@@ -83,25 +90,10 @@ public class SlimeTrackAndMovement : MonoBehaviour
             return;
         }
 
-        if (target)
-        {
-            CheckDirection();
-
-            moveSpeed = playerIsRight ? baseSpeed : -baseSpeed;
-        }
-
-        if (!TargetInRange() || !IsObstructed())
+        if (!TargetInRange() || IsObstructed())
         {
             target = null;
         }
-
-
-        
-
-        
-        
-        
-        
     }
 
     #endregion
@@ -161,10 +153,8 @@ public class SlimeTrackAndMovement : MonoBehaviour
 
         if (hit)
         {
-            // print("Target obstructed");
             return true;
         }
-        // print("Target not obstructed");
         return false;
     }
 
@@ -178,8 +168,6 @@ public class SlimeTrackAndMovement : MonoBehaviour
     void Jump()
     {
         isJumping = false;
-
-        
 
         rb.AddForce(new Vector2(moveSpeed, jumpHeight), ForceMode2D.Impulse);
     }
@@ -201,10 +189,6 @@ public class SlimeTrackAndMovement : MonoBehaviour
             baseSpeed = 0f;
         }
     }
-
-    
-
-
 
     void OnCollisionEnter2D(Collision2D collision)
     {

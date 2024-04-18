@@ -245,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 material = 1;
             }
-            else if (coll.transform.CompareTag("Obstruction"))
+            else if (coll.transform.CompareTag("Obstruction") || coll.transform.CompareTag("Terrain"))
             {
                 material = 2;
             }

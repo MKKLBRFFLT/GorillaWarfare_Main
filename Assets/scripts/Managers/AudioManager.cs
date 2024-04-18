@@ -9,15 +9,70 @@ public class AudioManager : MonoBehaviour
 
     [Header("Floats")]
     public float realVolume;
+    [SerializeField] float shopDistance;
 
     [Header("Lists")]
-    private List<AudioSource> audioSourcePool = new();
+    readonly List<AudioSource> audioSourcePool = new();
+
+    [Header("Transforms")]
+    Transform shopkeeper;
+
+    [Header("AudioSources")]
+    [SerializeField] AudioSource mainMusicAudio;
+    [SerializeField] AudioSource shopMusicAudio;
 
     [Header("Components")]
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] AudioMixerGroup masterVolumeMixer;
     [SerializeField] AudioMixerGroup sfxVolumeMixer;
     [SerializeField] AudioMixerGroup musicVolumeMixer;
+
+    #endregion
+
+    #region StartUpdate
+
+    void Start()
+    {
+        shopkeeper = GameObject.FindWithTag("Shop").transform.Find("orangutan");
+    }
+
+    void Update()
+    {
+        shopDistance = Vector2.Distance(transform.position, shopkeeper.position);
+
+        if (shopDistance <= 20 && shopDistance > 15)
+        {
+            mainMusicAudio.volume = 0.2f - (0.2f / shopDistance);
+            shopMusicAudio.volume = 0.2f / shopDistance;
+        }
+        if (shopDistance <= 15 && shopDistance > 10)
+        {
+            mainMusicAudio.volume = 0.2f - (1.2f / shopDistance);
+            shopMusicAudio.volume = 1.2f / shopDistance;
+        }
+        if (shopDistance <= 10 && shopDistance >= 5)
+        {
+            mainMusicAudio.volume = 0.2f - (2f / shopDistance);
+            shopMusicAudio.volume = 2f / shopDistance;
+
+            if (shopMusicAudio.volume >= 0.2f)
+            {
+                mainMusicAudio.volume = 0f;
+                shopMusicAudio.volume = 0.2f;
+            }
+        }
+        if (shopDistance < 5)
+        {
+            mainMusicAudio.volume = 0f;
+            shopMusicAudio.volume = 0.2f;
+        }
+
+        if (shopDistance > 20)
+        {
+            mainMusicAudio.volume = 0.2f;
+            shopMusicAudio.volume = 0f;
+        }
+    }
 
     #endregion
 
