@@ -10,9 +10,8 @@ public class Weapon : MonoBehaviour
     bool playerIsDead;
     [SerializeField] private float fireRate;
     AudioManager audioManager;
+    PlayerMovement playerMovement;
     private float nextFire;
-
-    #region Event Subscribtions
     
     void OnEnable()
     {
@@ -24,8 +23,6 @@ public class Weapon : MonoBehaviour
         PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
     }
 
-    #endregion
-
     void Start()
     {
         playerIsDead = false;
@@ -34,13 +31,14 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire2") && !playerIsDead)
+        playerMovement = GetComponentInParent<PlayerMovement>();
+
+        if (Input.GetButtonDown("Fire2") && !playerIsDead && playerMovement.moveBool)
         {
             Shoot();
         }
-
-        
     }
+
     void Shoot()
     {
         if (Time.time > nextFire)
@@ -49,15 +47,10 @@ public class Weapon : MonoBehaviour
             audioManager.PlayClip(fireWeaponAudio, "sfx");
             Instantiate(shotPrefab, firePoint.position, firePoint.rotation);
         }
-        
     }
-
-    #region Subribtion Handlers
 
     void HandlePlayerDeath()
     {
         playerIsDead = true;
     }
-
-    #endregion
 }

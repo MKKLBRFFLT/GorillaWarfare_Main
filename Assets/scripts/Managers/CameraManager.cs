@@ -62,9 +62,9 @@ public class CameraManager : MonoBehaviour
             float playerPos = player.transform.position.x;
             playerPos = Mathf.Clamp(playerPos, -5f, 500);
             
-            if (player.transform.position.y >= 6f)
+            if (player.transform.position.y >= 8f)
             {
-                mainCam.transform.position = new Vector3(playerPos, 13f, -10f);
+                mainCam.transform.position = new Vector3(playerPos, 12f, -10f);
             }
             else if (player.transform.position.y >= 3.5f)
             {
