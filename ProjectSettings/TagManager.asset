@@ -17,6 +17,7 @@ TagManager:
   - Canvas
   - Ground
   - SettingsMenu
+  - Shop
   layers:
   - Default
   - TransparentFX
