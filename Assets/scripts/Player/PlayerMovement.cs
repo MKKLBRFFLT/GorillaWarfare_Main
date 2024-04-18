@@ -267,190 +267,114 @@ public class PlayerMovement : MonoBehaviour
         jumping = true;
     }
 
-    IEnumerator Run()
+    void RunCheck(AudioClip ground, AudioClip metal)
+    {
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            if (material == 1)
+            {
+                audioManager.PlayClip(ground, "sfx");
+            }
+            else if (material == 2)
+            {
+                audioManager.PlayClip(metal, "sfx");
+            }
+        }
+    }
+
+    float RunCheckTimer(AudioClip ground, AudioClip metal)
     {
         if (material == 1)
         {
-            audioManager.PlayClip(run1, "sfx");
-            yield return new WaitForSeconds(run1.length);
+            return ground.length;
         }
         else if (material == 2)
         {
-            audioManager.PlayClip(runOb1, "sfx");
-            yield return new WaitForSeconds(runOb1.length);
-        }
-        
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run2, "sfx");
-                yield return new WaitForSeconds(run2.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb2, "sfx");
-                yield return new WaitForSeconds(runOb2.length);
-            }
+            return metal.length;
         }
         else
+        {
+            return 0f;
+        }
+    }
+
+    IEnumerator Run()
+    {
+        RunCheck(run1, runOb1);
+        yield return new WaitForSeconds(RunCheckTimer(run1, runOb1));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
 
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run3, "sfx");
-                yield return new WaitForSeconds(run3.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb3, "sfx");
-                yield return new WaitForSeconds(runOb3.length);
-            }
-        }
-        else
+        RunCheck(run2, runOb2);
+        yield return new WaitForSeconds(RunCheckTimer(run2, runOb2));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
 
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run4, "sfx");
-                yield return new WaitForSeconds(run4.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb4, "sfx");
-                yield return new WaitForSeconds(runOb4.length);
-            }
-        }
-        else
+        RunCheck(run3, runOb3);
+        yield return new WaitForSeconds(RunCheckTimer(run3, runOb3));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
 
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run5, "sfx");
-                yield return new WaitForSeconds(run5.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb5, "sfx");
-                yield return new WaitForSeconds(runOb5.length);
-            }
-        }
-        else
+        RunCheck(run4, runOb4);
+        yield return new WaitForSeconds(RunCheckTimer(run4, runOb4));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
 
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run6, "sfx");
-                yield return new WaitForSeconds(run6.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb6, "sfx");
-                yield return new WaitForSeconds(runOb6.length);
-            }
-        }
-        else
+        RunCheck(run5, runOb5);
+        yield return new WaitForSeconds(RunCheckTimer(run5, runOb5));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
 
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run7, "sfx");
-                yield return new WaitForSeconds(run7.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb7, "sfx");
-                yield return new WaitForSeconds(runOb7.length);
-            }
-        }
-        else
+        RunCheck(run6, runOb6);
+        yield return new WaitForSeconds(RunCheckTimer(run6, runOb6));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
 
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run8, "sfx");
-                yield return new WaitForSeconds(run8.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb8, "sfx");
-                yield return new WaitForSeconds(runOb8.length);
-            }
-        }
-        else
+        RunCheck(run7, runOb7);
+        yield return new WaitForSeconds(RunCheckTimer(run7, runOb7));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
 
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run9, "sfx");
-                yield return new WaitForSeconds(run9.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb9, "sfx");
-                yield return new WaitForSeconds(runOb9.length);
-            }
-        }
-        else
+        RunCheck(run8, runOb8);
+        yield return new WaitForSeconds(RunCheckTimer(run8, runOb8));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
-        
-        if ((dirX < 0f || dirX > 0f) && IsGrounded())
-        {
-            if (material == 1)
-            {
-                audioManager.PlayClip(run10, "sfx");
-                yield return new WaitForSeconds(run10.length);
-            }
-            else if (material == 2)
-            {
-                audioManager.PlayClip(runOb10, "sfx");
-                yield return new WaitForSeconds(runOb10.length);
-            }
-        }
-        else
+
+        RunCheck(run9, runOb9);
+        yield return new WaitForSeconds(RunCheckTimer(run9, runOb9));
+        if (dirX == 0f || !IsGrounded())
         {
             running = false;
             yield break;
         }
-        
+
+        RunCheck(run10, runOb10);
+        yield return new WaitForSeconds(RunCheckTimer(run10, runOb10));
+
         running = false;
         yield break;
     }
