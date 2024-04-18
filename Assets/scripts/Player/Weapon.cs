@@ -6,17 +6,13 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject shotPrefab;
-    public GameObject homingShotPrefab;
-    [SerializeField] private AudioClip fireWeaponAudio;
-    [SerializeField] AudioClip notEnoughAmmoAudio;
+    [SerializeField] private AudioSource audioPlayer;
     bool playerIsDead;
     [SerializeField] private float fireRate;
-    AudioManager audioManager;
-    PlayerMovement playerMovement;
-    PlayerCounts playerCounts;
-    UIManager uiManager;
     private float nextFire;
-    
+
+    #region Event Subscribtions
+
     void OnEnable()
     {
         PlayerHealth.OnPlayerDeath += HandlePlayerDeath;
@@ -27,49 +23,39 @@ public class Weapon : MonoBehaviour
         PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
     }
 
+    #endregion
+
     void Start()
     {
         playerIsDead = false;
-        audioManager = GameObject.FindWithTag("Managers").GetComponent<AudioManager>();
     }
 
     void Update()
     {
-        playerMovement = GetComponentInParent<PlayerMovement>();
-        uiManager = GameObject.FindWithTag("Managers").GetComponent<UIManager>();
-        playerCounts = playerMovement.GetComponentInChildren<PlayerCounts>();
-
-        if (Input.GetButtonDown("Fire1") && !playerIsDead && playerMovement.moveBool)
+        if (Input.GetButtonDown("Fire2") && !playerIsDead)
         {
             Shoot();
         }
-    }
 
+
+    }
     void Shoot()
     {
         if (Time.time > nextFire)
         {
-            nextFire = Time.time +fireRate;
-            if (!uiManager.homingWeaponSelected)
-            {
-                audioManager.PlayClip(fireWeaponAudio, "sfx");
-                Instantiate(shotPrefab, firePoint.position, firePoint.rotation);
-            }
-            else if (playerCounts.specialAmmo > 0)
-            {
-                audioManager.PlayClip(fireWeaponAudio, "sfx");
-                Instantiate(homingShotPrefab, firePoint.position, firePoint.rotation);
-                playerCounts.specialAmmo -= 1;
-            }
-            else if (uiManager.homingWeaponSelected && playerCounts.specialAmmo == 0)
-            {
-                audioManager.PlayClip(notEnoughAmmoAudio, "sfx");
-            }
+            nextFire = Time.time + fireRate;
+            audioPlayer.Play();
+            Instantiate(shotPrefab, firePoint.position, firePoint.rotation);
         }
+
     }
+
+    #region Subribtion Handlers
 
     void HandlePlayerDeath()
     {
         playerIsDead = true;
     }
+
+    #endregion
 }
