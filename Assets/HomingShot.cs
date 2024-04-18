@@ -10,7 +10,6 @@ public class HomingShot : MonoBehaviour
     float closestDistance = 0f;
     Transform target;
     [SerializeField] Transform point;
-    Transform player;
 
     readonly float speed = 15f;
     [SerializeField] bool isHoming;
@@ -23,7 +22,6 @@ public class HomingShot : MonoBehaviour
     {
         rb.velocity = transform.right * speed;
         
-        player = GameObject.FindWithTag("Player").transform;
         enemies = GameObject.FindGameObjectsWithTag("Enemy").ToList();
 
         foreach (GameObject e in enemies)

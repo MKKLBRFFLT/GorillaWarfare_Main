@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
         uiManager = GameObject.FindWithTag("Managers").GetComponent<UIManager>();
         playerCounts = playerMovement.GetComponentInChildren<PlayerCounts>();
 
-        if (Input.GetButtonDown("Fire2") && !playerIsDead && playerMovement.moveBool)
+        if (Input.GetButtonDown("Fire1") && !playerIsDead && playerMovement.moveBool)
         {
             Shoot();
         }
