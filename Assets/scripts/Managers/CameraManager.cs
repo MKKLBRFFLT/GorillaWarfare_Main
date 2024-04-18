@@ -60,7 +60,7 @@ public class CameraManager : MonoBehaviour
         if (playerFastCamBool)
         {
             float playerPos = player.transform.position.x;
-            playerPos = Mathf.Clamp(playerPos, -5f, 500);
+            playerPos = Mathf.Clamp(playerPos, -5f, 135);
             
             if (player.transform.position.y >= 8f)
             {
