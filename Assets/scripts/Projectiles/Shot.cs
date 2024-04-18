@@ -7,7 +7,7 @@ public class Shot : MonoBehaviour
     [SerializeField] private float speed = 200f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject impactEffect;
-    
+
 
     void Start()
     {
@@ -16,6 +16,8 @@ public class Shot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        Debug.Log(hitInfo.name);
+
         Instantiate(impactEffect, transform.position, transform.rotation);
 
         if (hitInfo.TryGetComponent<TurretHealth>(out TurretHealth tComp))
@@ -30,11 +32,11 @@ public class Shot : MonoBehaviour
         {
             sComp.TakeDamage(1);
         }
-        
+
 
         Destroy(gameObject);
 
     }
 
-    
+
 }
