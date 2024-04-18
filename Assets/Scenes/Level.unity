@@ -3334,10 +3334,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5043041153229102599, guid: a37d56843d144e6418288add32c58801, type: 3}
-      propertyPath: m_Size.y
-      value: 16
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4483,6 +4479,7 @@ MonoBehaviour:
   aState: 0
   bananaAmount: 0
   ammoObjMoveSpeed: 0.1
+  homingWeaponSelected: 0
   activeColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   audioMixer: {fileID: 24100000, guid: 888d1919401d2a54390bfd5b92083571, type: 2}

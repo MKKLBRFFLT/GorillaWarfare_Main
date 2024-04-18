@@ -30,11 +30,7 @@ public class Shot : MonoBehaviour
         {
             sComp.TakeDamage(1);
         }
-        
 
         Destroy(gameObject);
-
     }
-
-    
 }

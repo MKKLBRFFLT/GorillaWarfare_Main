@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aState: 0
   bananaAmount: 0
-  specialAmmo: 0
+  specialAmmo: 3
   bananaPickupAudio: {fileID: 8300000, guid: 972166aecee0b694fab2ef90c88d60b3, type: 3}
 --- !u!114 &1192679682336903759
 MonoBehaviour:
@@ -540,7 +540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4254394154787056487}
   shotPrefab: {fileID: 5266984072944237352, guid: babe0dc84088dee42a6238ad25e7b768, type: 3}
+  homingShotPrefab: {fileID: 5266984072944237352, guid: 88a66856d9893964588712940d23364e, type: 3}
   fireWeaponAudio: {fileID: 8300000, guid: f904bf59515ba104ea2deaffdb732cb9, type: 3}
+  notEnoughAmmoAudio: {fileID: 8300000, guid: 0186262bc9b374d4a8ae70cabde32820, type: 3}
   fireRate: 0.5
 --- !u!1 &2761631325584167640 stripped
 GameObject:
@@ -611,7 +613,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.69, y: 15.8}
+  m_Size: {x: 10.69, y: 16}
   m_EdgeRadius: 0
 --- !u!50 &6167275958955556859
 Rigidbody2D:

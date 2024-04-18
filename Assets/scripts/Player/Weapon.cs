@@ -6,11 +6,15 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject shotPrefab;
+    public GameObject homingShotPrefab;
     [SerializeField] private AudioClip fireWeaponAudio;
+    [SerializeField] AudioClip notEnoughAmmoAudio;
     bool playerIsDead;
     [SerializeField] private float fireRate;
     AudioManager audioManager;
     PlayerMovement playerMovement;
+    PlayerCounts playerCounts;
+    UIManager uiManager;
     private float nextFire;
     
     void OnEnable()
@@ -32,6 +36,8 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         playerMovement = GetComponentInParent<PlayerMovement>();
+        uiManager = GameObject.FindWithTag("Managers").GetComponent<UIManager>();
+        playerCounts = playerMovement.GetComponentInChildren<PlayerCounts>();
 
         if (Input.GetButtonDown("Fire2") && !playerIsDead && playerMovement.moveBool)
         {
@@ -44,8 +50,21 @@ public class Weapon : MonoBehaviour
         if (Time.time > nextFire)
         {
             nextFire = Time.time +fireRate;
-            audioManager.PlayClip(fireWeaponAudio, "sfx");
-            Instantiate(shotPrefab, firePoint.position, firePoint.rotation);
+            if (!uiManager.homingWeaponSelected)
+            {
+                audioManager.PlayClip(fireWeaponAudio, "sfx");
+                Instantiate(shotPrefab, firePoint.position, firePoint.rotation);
+            }
+            else if (playerCounts.specialAmmo > 0)
+            {
+                audioManager.PlayClip(fireWeaponAudio, "sfx");
+                Instantiate(homingShotPrefab, firePoint.position, firePoint.rotation);
+                playerCounts.specialAmmo -= 1;
+            }
+            else if (uiManager.homingWeaponSelected && playerCounts.specialAmmo == 0)
+            {
+                audioManager.PlayClip(notEnoughAmmoAudio, "sfx");
+            }
         }
     }
 

@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Bools")]
     bool elementsFound;
+    public bool homingWeaponSelected;
     
     [Header("TMPs")]
     TMP_Text bananaText;
@@ -32,11 +33,6 @@ public class UIManager : MonoBehaviour
     TMP_Text masterVolumeText;
     TMP_Text musicVolumeText;
     TMP_Text sfxVolumeText;
-
-    [Header("Sliders")]
-    Slider masterVolumeSlider;
-    Slider musicVolumeSlider;
-    Slider sfxVolumeSlider;
 
     [Header("GameObjects")]
     GameObject canvas;
@@ -246,11 +242,13 @@ public class UIManager : MonoBehaviour
             case AmmoState.normal:
                 StopCoroutine(nameof(AmmoToBack));
                 StartCoroutine(AmmoToFront());
+                homingWeaponSelected = false;
                 break;
 
             case AmmoState.special:
                 StopCoroutine(nameof(AmmoToFront));
                 StartCoroutine(AmmoToBack());
+                homingWeaponSelected = true;
                 break;
         }
     }
