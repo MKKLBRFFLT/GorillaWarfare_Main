@@ -19,14 +19,29 @@ public class PlayerMovement : MonoBehaviour
     public bool moveBool;
     private bool aimUp;
     private bool aimDown;
-    [SerializeField] bool grounded;
+    bool jumping;
+    bool running;
 
     private float dirX = 0f;
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 7f;
 
+    [SerializeField] AudioClip jumpStart2;
+    [SerializeField] AudioClip jumpLand2;
+    [SerializeField] AudioClip run1;
+    [SerializeField] AudioClip run2;
+    [SerializeField] AudioClip run3;
+    [SerializeField] AudioClip run4;
+    [SerializeField] AudioClip run5;
+    [SerializeField] AudioClip run6;
+    [SerializeField] AudioClip run7;
+    [SerializeField] AudioClip run8;
+    [SerializeField] AudioClip run9;
+    [SerializeField] AudioClip run10;
+
     PlayerHealth healthScript;
+    AudioManager audioManager;
 
     void OnEnable()
     {
@@ -53,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         characterTransform = GetComponent<Transform>();
         healthScript = transform.Find("Target").GetComponent<PlayerHealth>();
+        audioManager = GameObject.FindWithTag("Managers").GetComponent<AudioManager>();
 
         UpdateAnimationState();
 
@@ -73,7 +89,15 @@ public class PlayerMovement : MonoBehaviour
                 {
                     StandUp();
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    audioManager.PlayClip(jumpStart2, "sfx");
+                    StartCoroutine(StartJump());
                 }
+            }
+
+            if (jumping && IsGrounded())
+            {
+                audioManager.PlayClip(jumpLand2, "sfx");
+                jumping = false;
             }
 
             if (Input.GetKeyDown(KeyCode.LeftControl) & IsGrounded())
@@ -105,8 +129,6 @@ public class PlayerMovement : MonoBehaviour
 
             UpdateAnimationState();
         }
-
-        grounded = IsGrounded();
     }
     
     private void UpdateAnimationState()
@@ -117,12 +139,22 @@ public class PlayerMovement : MonoBehaviour
             StandUp();
             state = MovementState.run;
             characterTransform.rotation = Quaternion.identity;
+            if (!running && IsGrounded())
+            {
+                StartCoroutine(Run());
+                running = true;
+            }
         }
         else if (dirX < 0f)
         {
             StandUp();
             state = MovementState.run;
             characterTransform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            if (!running && IsGrounded())
+            {
+                StartCoroutine(Run());
+                running = true;
+            }
         }
         else if (isCrouched)
         {
@@ -181,6 +213,126 @@ public class PlayerMovement : MonoBehaviour
         isCrouched = false;
         aimUp = false;
         aimDown = false;
+    }
+
+    IEnumerator StartJump()
+    {
+        running = false;
+
+        yield return new WaitForSeconds(0.5f);
+        jumping = true;
+    }
+
+    IEnumerator Run()
+    {
+        audioManager.PlayClip(run1, "sfx");
+        yield return new WaitForSeconds(run1.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run2, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run2.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run3, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run3.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run4, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run4.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run5, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run5.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run6, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run6.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run7, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run7.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run8, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run8.length);
+
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run9, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
+
+        yield return new WaitForSeconds(run9.length);
+        
+        if ((dirX < 0f || dirX > 0f) && IsGrounded())
+        {
+            audioManager.PlayClip(run10, "sfx");
+        }
+        else
+        {
+            running = false;
+            yield break;
+        }
     }
 
     void HandleStartGame()
