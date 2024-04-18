@@ -72,11 +72,11 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonDown("Fire1") & IsGrounded())
+            if (Input.GetKeyDown(KeyCode.LeftControl) & IsGrounded())
             {
                 isCrouched = true;
             }
-            else if (Input.GetButtonUp("Fire1"))
+            else if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 isCrouched = false;
             }
