@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aState: 0
   bananaAmount: 0
-  specialAmmo: 0
+  specialAmmo: 3
   bananaPickupAudio: {fileID: 8300000, guid: 972166aecee0b694fab2ef90c88d60b3, type: 3}
 --- !u!114 &1192679682336903759
 MonoBehaviour:
@@ -654,6 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a910da69d83fa624fadeb1eb5347502e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   jumpableGround:
     serializedVersion: 2
     m_Bits: 136
