@@ -27,9 +27,10 @@ public class RobotHealth : MonoBehaviour
         {
 
             Vector3 headPosition = transform.position + Vector3.up * yOffset; // Offset the position slightly above
-            Instantiate(deathAnimation, transform.position, Quaternion.identity);
+            GameObject explosion = Instantiate(deathAnimation, transform.position, Quaternion.identity);
             Instantiate(robotHead, headPosition, transform.rotation); // Instantiate the robotHead at the adjusted position
             Instantiate(banana, transform.position, Quaternion.identity);
+            Destroy(explosion, 2f);
             Destroy(gameObject);
         }
     }
