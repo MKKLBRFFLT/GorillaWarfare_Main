@@ -20,11 +20,16 @@ public class PlayerHealth : MonoBehaviour
     
     [Header("Floats")]
     readonly float damageCooldown = 1f;
+    float clipLength;
 
     [Header("Bools")]
     public bool cooldown;
     public bool isDead;
     [SerializeField] bool invinsible = false;
+    bool animFound;
+
+    [Header("Components")]
+    PlayerMovement playerMovement;
 
     #endregion
 
@@ -49,6 +54,8 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        
         health = maxHealth;
         // print("Player has " + health + " health");
 
@@ -62,6 +69,20 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         CheckHealth();
+
+        if (!animFound)
+        {
+            AnimationClip[] clips = playerMovement.anim.runtimeAnimatorController.animationClips;
+            foreach(AnimationClip clip in clips)
+            {
+                if (clip.name == "death")
+                {
+                    clipLength = clip.length;
+                }
+            }
+
+            animFound = true;
+        }
     }
 
     #endregion
@@ -94,7 +115,7 @@ public class PlayerHealth : MonoBehaviour
 
     IEnumerator PlayerDying()
     {
-        yield return new WaitForSeconds(2f); // Ændre "2f" til en reference af playerDeath animationens længde.
+        yield return new WaitForSeconds(clipLength); // Ændre "2f" til en reference af playerDeath animationens længde.
         
         OnPlayerDeath?.Invoke();
         Time.timeScale = 0f;

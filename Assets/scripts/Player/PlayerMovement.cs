@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private BoxCollider2D coll;
-    private Animator anim;
+    public Animator anim;
     private Transform characterTransform;
 
     [SerializeField] private LayerMask jumpableGround;
