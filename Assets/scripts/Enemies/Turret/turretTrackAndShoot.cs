@@ -46,6 +46,12 @@ public class TurretTrackAndShoot : MonoBehaviour
     [SerializeField] LayerMask playerMask;
     [SerializeField] LayerMask obstructionMask;
 
+    [Header("AudioClips")]
+    [SerializeField] AudioClip shootAudio;
+
+    [Header("Components")]
+    AudioManager audioManager;
+
     #endregion
 
     #region StartUpdate
@@ -55,6 +61,8 @@ public class TurretTrackAndShoot : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform.Find("Target");
         BulletPrefabs = GameObject.FindWithTag("BulletPrefabFolder");
+
+        audioManager = GameObject.FindWithTag("Managers").GetComponent<AudioManager>();
 
         if (isLookingLeft)
         {
@@ -242,6 +250,7 @@ public class TurretTrackAndShoot : MonoBehaviour
     void Shoot()
     {
         GameObject bulletCopy = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity, BulletPrefabs.transform);
+        audioManager.PlayClip(shootAudio, "sfx");
         
         if (!isOmniDirectional)
         {

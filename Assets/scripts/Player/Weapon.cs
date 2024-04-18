@@ -6,9 +6,10 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject shotPrefab;
-    [SerializeField] private AudioSource audioPlayer;
+    [SerializeField] private AudioClip fireWeaponAudio;
     bool playerIsDead;
     [SerializeField] private float fireRate;
+    AudioManager audioManager;
     private float nextFire;
 
     #region Event Subscribtions
@@ -28,6 +29,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         playerIsDead = false;
+        audioManager = GameObject.FindWithTag("Managers").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -44,7 +46,7 @@ public class Weapon : MonoBehaviour
         if (Time.time > nextFire)
         {
             nextFire = Time.time +fireRate;
-            audioPlayer.Play();
+            audioManager.PlayClip(fireWeaponAudio, "sfx");
             Instantiate(shotPrefab, firePoint.position, firePoint.rotation);
         }
         

@@ -10,23 +10,14 @@ public class StoreManager : MonoBehaviour
 {
     [Header("Floats")]
     public float currency;
-    public float SFXVolume;
-    public float masterVolume;
-    public float realVolume;
 
     [Header("Bools")]
     public bool storeOpen;
     bool pannelsLoaded;
     bool playerMoveStoped;
 
-    [Header("Ints")]
-    [SerializeField] private int InitialAudioSourcePoolSize = 10;
-
     [Header("TMP_Pros")]
     public TMP_Text currencyText;
-
-    [Header("Lists")]
-    private List<AudioSource> audioSourcePool = new();
     
     [Header("Arrays")]
     public ShopItemsSO[] shopItemsSO;
@@ -37,10 +28,6 @@ public class StoreManager : MonoBehaviour
     [Header("GameObjects")]
     [SerializeField] GameObject contents;
 
-    [Header("Components")]
-    [SerializeField] AudioClip audioBuy;
-    [SerializeField] AudioMixer audioMixer;
-
     // Start is called before the first frame update
     void Start()
     { 
@@ -50,11 +37,6 @@ public class StoreManager : MonoBehaviour
         }
 
         CheckShopPurchaseable();
-
-        for (int i = 0; i < InitialAudioSourcePoolSize; i++)
-        {
-            _ = AddNewSourceToPool();
-        }
     }
 
     // Update is called once per frame
@@ -164,44 +146,5 @@ public class StoreManager : MonoBehaviour
     public void CloseStore()
     {
         storeOpen = false;
-    }
-
-    private AudioSource AddNewSourceToPool()
-    {
-        audioMixer.GetFloat("sfxVolume", out float dBSFX);
-        SFXVolume = Mathf.Pow(10.0f, dBSFX / 20.0f);
-
-        audioMixer.GetFloat("masterVolume", out float dBMaster);
-        masterVolume = Mathf.Pow(10.0f, dBMaster / 20.0f);
-        
-        realVolume = (SFXVolume + masterVolume) / 2 * 0.05f;
-        
-        AudioSource newSource = gameObject.AddComponent<AudioSource>();
-        newSource.playOnAwake = false;
-        newSource.volume = 0.05f;
-        audioSourcePool.Add(newSource);
-        return newSource;
-    }
-
-    private AudioSource GetAvailablePoolSource()
-    {
-        //Fetch the first source in the pool that is not currently playing anything
-        foreach (var source in audioSourcePool)
-        {
-            if (!source.isPlaying)
-            {
-                return source;
-            }
-        }
- 
-        //No unused sources. Create and fetch a new source
-        return AddNewSourceToPool();
-    }
-
-    public void PlayClip(AudioClip clip)
-    {
-        AudioSource source = GetAvailablePoolSource();
-        source.clip = clip;
-        source.Play();
     }
 }

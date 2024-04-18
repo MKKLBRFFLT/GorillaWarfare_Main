@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class banana : MonoBehaviour
 {
+    public static event Action OnPickup;
+
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private AudioSource audioPlayer;
 
     private void Start()
     {
@@ -17,20 +19,8 @@ public class banana : MonoBehaviour
         {
             pComp.bananaAmount += 1;
             spriteRenderer.enabled = false;
-            audioPlayer.Play();
+            OnPickup?.Invoke();
+            Destroy(gameObject);
         }
-
-
-    }
-    private void PlayAudioAndDestroy()
-    {
-        audioPlayer.Play();
-        StartCoroutine(DestroyAfterDelay(audioPlayer.clip.length));
-    }
-
-    private IEnumerator DestroyAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
     }
 }

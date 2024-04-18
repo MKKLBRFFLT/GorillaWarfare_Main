@@ -457,3 +457,4 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 136
+  shootAudio: {fileID: 8300000, guid: 5bfa309cf55a87d49bbbaf6aff1f9b0e, type: 3}

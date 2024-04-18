@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerCounts : MonoBehaviour
 {
@@ -12,6 +13,26 @@ public class PlayerCounts : MonoBehaviour
     public int bananaAmount;
     public int specialAmmo;
 
+    [Header("AudioClips")]
+    [SerializeField] AudioClip bananaPickupAudio;
+
+    [Header("Components")]
+    AudioManager audioManager;
+
+    #endregion
+
+    #region Subscriptions
+
+    void OnEnable()
+    {
+        banana.OnPickup += HandleBanana;
+    }
+
+    void OnDisable()
+    {
+        banana.OnPickup -= HandleBanana;
+    }
+
     #endregion
 
     #region StartUpdate
@@ -19,7 +40,7 @@ public class PlayerCounts : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioManager = GameObject.FindWithTag("Managers").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -38,6 +59,15 @@ public class PlayerCounts : MonoBehaviour
                     break;
             }
         }
+    }
+
+    #endregion
+    
+    #region HandleSubscriptions
+
+    void HandleBanana()
+    {
+        audioManager.PlayClip(bananaPickupAudio, "sfx");
     }
 
     #endregion

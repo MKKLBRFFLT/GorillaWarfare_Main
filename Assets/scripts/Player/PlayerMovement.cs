@@ -53,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
         healthScript = transform.Find("Target").GetComponent<PlayerHealth>();
 
         UpdateAnimationState();
-
-        moveBool = true;
     }
 
     // Update is called once per frame
