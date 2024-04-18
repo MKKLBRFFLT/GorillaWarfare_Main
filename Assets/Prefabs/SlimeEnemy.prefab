@@ -177,10 +177,10 @@ MonoBehaviour:
   target: {fileID: 0}
   playerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 256
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 136
   animator: {fileID: 5469365250936253679}
 --- !u!114 &5999021896864430160
 MonoBehaviour:

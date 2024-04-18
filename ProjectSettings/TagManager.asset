@@ -18,6 +18,7 @@ TagManager:
   - Ground
   - SettingsMenu
   - Shop
+  - Terrain
   layers:
   - Default
   - TransparentFX

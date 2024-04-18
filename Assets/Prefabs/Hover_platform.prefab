@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 6649779372833557991}
   m_Layer: 7
   m_Name: Platform
-  m_TagString: Obstruction
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
