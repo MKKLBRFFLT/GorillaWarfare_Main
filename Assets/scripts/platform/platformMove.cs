@@ -49,12 +49,25 @@ public class PlatformMove : MonoBehaviour
         {
             isDefaultDirection = !isDefaultDirection;
         }
+
+        if (collision.CompareTag("Player"))
+        {
+            collision.transform.SetParent(this.transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.transform.SetParent(null);
+        }
     }
 
     #endregion
 
     #region Enums
-    
+
     public enum DirectionState
     {
         vertical,
