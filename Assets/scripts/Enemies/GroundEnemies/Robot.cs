@@ -18,6 +18,7 @@ public class Robot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (isFlipped)
         {
             characterTransform.rotation = Quaternion.Euler(0f, 180f, 0f);
