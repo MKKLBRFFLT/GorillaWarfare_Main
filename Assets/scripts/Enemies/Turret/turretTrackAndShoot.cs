@@ -263,6 +263,8 @@ public class TurretTrackAndShoot : MonoBehaviour
 
         bulletCopy.transform.rotation = transform.rotation * Quaternion.Euler(new Vector3(0,0,90));
         bulletCopy.transform.localPosition += new Vector3(0f, 0f, -4f);
+
+        Destroy(bulletCopy, 3f);
     }
 
     #endregion
