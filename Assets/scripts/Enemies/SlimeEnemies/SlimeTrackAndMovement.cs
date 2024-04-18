@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SlimeTrackAndMovement : MonoBehaviour
@@ -13,6 +14,7 @@ public class SlimeTrackAndMovement : MonoBehaviour
     [SerializeField] float jumpHeight = 5f;
     [SerializeField] float jumpTime = 2f;
     [SerializeField] float range = 10f;
+    
 
     [Header("Bools")]
     [SerializeField] bool isGoingRight = true;
@@ -33,23 +35,37 @@ public class SlimeTrackAndMovement : MonoBehaviour
 
     [Header("Components")]
     Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
+
+    public Animator animator;
+    private Transform characterTransform;
+
 
     #endregion
 
     #region StartUpdate
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
+        characterTransform = GetComponent<Transform>();
+
 
         isJumping = false;
+
+        AnimationState();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        AnimationState();
+
         targetInRange = TargetInRange();
 
         moveSpeed = isGoingRight ? baseSpeed : -baseSpeed;
@@ -57,6 +73,7 @@ public class SlimeTrackAndMovement : MonoBehaviour
         if (!isJumping && isGrounded)
         {
             StartCoroutine(StartJump());
+            
             isJumping = true;
         }
 
@@ -77,12 +94,41 @@ public class SlimeTrackAndMovement : MonoBehaviour
         {
             target = null;
         }
+
+
+        
+
+        
+        
+        
+        
     }
 
     #endregion
 
     #region  Methods
+    
+    private void AnimationState()
+    {
+        if (isGoingRight)
+        {
+            characterTransform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+        else
+        {
+            characterTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
 
+        if (isGrounded)
+        {
+            animator.SetInteger("slime_State", 0);
+        }
+        else
+        {
+            animator.SetInteger("slime_State", 1);
+        }
+    }
+    
     void FindTarget()
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, range, (Vector2) transform.position, 0f, playerMask);
@@ -133,6 +179,8 @@ public class SlimeTrackAndMovement : MonoBehaviour
     {
         isJumping = false;
 
+        
+
         rb.AddForce(new Vector2(moveSpeed, jumpHeight), ForceMode2D.Impulse);
     }
 
@@ -154,6 +202,10 @@ public class SlimeTrackAndMovement : MonoBehaviour
         }
     }
 
+    
+
+
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Obstruction"))
@@ -167,6 +219,7 @@ public class SlimeTrackAndMovement : MonoBehaviour
         if (collision.transform.CompareTag("Ground") || collision.transform.CompareTag("Obstruction"))
         {
             isGrounded = true;
+            
         }
     }
 
