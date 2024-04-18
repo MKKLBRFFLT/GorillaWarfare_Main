@@ -11,7 +11,7 @@ public class PlayerCounts : MonoBehaviour
     
     [Header("Ints")]
     public int bananaAmount;
-    public int specialAmmo;
+    public int specialAmmo = 10;
 
     [Header("AudioClips")]
     [SerializeField] AudioClip bananaPickupAudio;
