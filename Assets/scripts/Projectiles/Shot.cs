@@ -32,8 +32,11 @@ public class Shot : MonoBehaviour
         {
             sComp.TakeDamage(1);
         }
-
-
+        if (hitInfo.TryGetComponent<Finish>(out Finish fComp))
+        {
+            fComp.TakeDamage();
+        }
+        
         Destroy(gameObject);
 
     }

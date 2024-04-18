@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     public GameObject homingShotPrefab;
     [SerializeField] private AudioClip fireWeaponAudio;
     [SerializeField] AudioClip notEnoughAmmoAudio;
-    bool playerIsDead;
     [SerializeField] private float fireRate;
     AudioManager audioManager;
     PlayerMovement playerMovement;
@@ -17,24 +16,9 @@ public class Weapon : MonoBehaviour
     UIManager uiManager;
     private float nextFire;
 
-    #region Event Subscribtions
-
-    void OnEnable()
-    {
-        PlayerHealth.OnPlayerDeath += HandlePlayerDeath;
-    }
-
-    void OnDisable()
-    {
-        PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
-    }
-
-    #endregion
-
     void Start()
     {
         audioManager = GameObject.FindWithTag("Managers").GetComponent<AudioManager>();
-        playerIsDead = false;
     }
 
     void Update()
@@ -43,7 +27,7 @@ public class Weapon : MonoBehaviour
         uiManager = GameObject.FindWithTag("Managers").GetComponent<UIManager>();
         playerCounts = playerMovement.GetComponentInChildren<PlayerCounts>();
 
-        if (Input.GetMouseButtonDown(0) && !playerIsDead && playerMovement.moveBool)
+        if (Input.GetMouseButtonDown(0) && playerMovement.moveBool)
         {
             Shoot();
         }
@@ -70,13 +54,4 @@ public class Weapon : MonoBehaviour
             }
         }
     }
-
-    #region Subribtion Handlers
-
-    void HandlePlayerDeath()
-    {
-        playerIsDead = true;
-    }
-
-    #endregion
 }

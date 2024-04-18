@@ -32,12 +32,14 @@ public class PlayerMovement : MonoBehaviour
     {
         CameraManager.OnPlayerFastCamActive += HandleStartGame;
         PlayerHealth.OnPlayerDeath += HandlePlayerDeath;
+        Finish.OnLevelComplete += HandleFinishGame;
     }
 
     void OnDisable()
     {
         CameraManager.OnPlayerFastCamActive -= HandleStartGame;
         PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
+        Finish.OnLevelComplete -= HandleFinishGame;
     }
 
     private enum MovementState { idle, run, jump, fall, crouch, death, aim_up, aim_down }
@@ -53,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
         healthScript = transform.Find("Target").GetComponent<PlayerHealth>();
 
         UpdateAnimationState();
+
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -187,5 +191,11 @@ public class PlayerMovement : MonoBehaviour
     void HandlePlayerDeath()
     {
         moveBool = false;
+    }
+
+    void HandleFinishGame()
+    {
+        moveBool = false;
+        Time.timeScale = 0f;
     }
 }

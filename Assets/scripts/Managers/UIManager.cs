@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
     GameObject deathMsgObj;
     GameObject promtText;
     GameObject settingsMenu;
+    GameObject levelCompleteObj;
     
     [Header("Transforms")]
     Transform ammoFront;
@@ -70,12 +71,14 @@ public class UIManager : MonoBehaviour
     {
         CameraManager.OnPlayerFastCamActive += HandleStartGame;
         PlayerHealth.OnPlayerDeath += HandlePlayerDeath;
+        Finish.OnLevelComplete += HandleFinishGame;
     }
 
     void OnDisable()
     {
         CameraManager.OnPlayerFastCamActive -= HandleStartGame;
         PlayerHealth.OnPlayerDeath -= HandlePlayerDeath;
+        Finish.OnLevelComplete -= HandleFinishGame;
     }
 
     #endregion
@@ -150,9 +153,11 @@ public class UIManager : MonoBehaviour
         ammoObjDistance = Vector3.Distance(ammoBack.position, ammoFront.position);
 
         deathMsgObj = canvas.transform.Find("UIMenus/DeathMsgPanel").gameObject;
+        levelCompleteObj = canvas.transform.Find("UIMenus/LevelCompletePanel").gameObject;
         promtText = canvas.transform.Find("UIElements/PromtText (TMP)").gameObject;
         
         deathMsgObj.SetActive(false);
+        levelCompleteObj.SetActive(false);
         settingsMenu.SetActive(false);
 
         elementsFound = true;
@@ -320,6 +325,11 @@ public class UIManager : MonoBehaviour
     void HandlePlayerDeath()
     {
         deathMsgObj.SetActive(true);
+    }
+
+    void HandleFinishGame()
+    {
+        levelCompleteObj.SetActive(true);
     }
 
     #endregion

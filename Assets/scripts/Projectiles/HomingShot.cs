@@ -65,6 +65,10 @@ public class HomingShot : MonoBehaviour
         {
             sComp.TakeDamage(1);
         }
+        if (hitInfo.TryGetComponent<Finish>(out Finish fComp))
+        {
+            fComp.TakeDamage();
+        }
 
         Destroy(gameObject);
     }
