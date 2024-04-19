@@ -10,7 +10,7 @@ public class headfollow : MonoBehaviour
     void Start()
     {
         headRenderer = GetComponent<SpriteRenderer>();
-        target = GameObject.FindWithTag("Player").transform.Find("Target");
+        target = GameObject.FindWithTag("Target").transform;
     }
 
     // Update is called once per frame

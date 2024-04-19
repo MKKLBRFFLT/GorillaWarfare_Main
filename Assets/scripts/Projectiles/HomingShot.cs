@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ public class HomingShot : MonoBehaviour
 {
     float newDistance;
     float closestDistance = 0f;
-    Transform target;
     [SerializeField] Transform point;
 
     readonly float speed = 15f;
@@ -26,13 +26,12 @@ public class HomingShot : MonoBehaviour
 
         foreach (GameObject e in enemies)
         {
-            newDistance = Vector3.Distance(e.transform.position, transform.position);
-            target = e.transform;
+            newDistance = Vector2.Distance(e.transform.position, transform.position);
 
             if (newDistance < closestDistance || closestDistance == 0f)
             {
                 closestDistance = newDistance;
-                point = target;
+                point = e.transform;
             }
         }
 

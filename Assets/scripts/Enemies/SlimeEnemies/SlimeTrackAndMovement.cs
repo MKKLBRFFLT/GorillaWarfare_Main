@@ -200,10 +200,9 @@ public class SlimeTrackAndMovement : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Ground") )
+        if (collision.transform.CompareTag("Ground") || collision.transform.CompareTag("Obstruction"))
         {
             isGrounded = true;
-            
         }
     }
 
