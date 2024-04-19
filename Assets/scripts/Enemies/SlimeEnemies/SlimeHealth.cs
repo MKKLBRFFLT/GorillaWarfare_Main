@@ -10,6 +10,7 @@ public class SlimeHealth : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] GameObject banana;
+    [SerializeField] GameObject deathAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class SlimeHealth : MonoBehaviour
         if (health <= 0)
         {
             Instantiate(banana, transform.position, Quaternion.identity);
+            Instantiate(deathAnim, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
