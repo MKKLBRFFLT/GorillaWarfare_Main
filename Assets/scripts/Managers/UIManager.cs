@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     public int bananaAmount;
     int health;
     int specialAmmo;
+    int score;
+    int timeInMenu;
 
     [Header("Floats")]
     [SerializeField] float ammoObjMoveSpeed = 0.1f;
@@ -25,6 +27,7 @@ public class UIManager : MonoBehaviour
     [Header("Bools")]
     bool elementsFound;
     public bool homingWeaponSelected;
+    bool levelComplete;
     
     [Header("TMPs")]
     TMP_Text bananaText;
@@ -33,6 +36,7 @@ public class UIManager : MonoBehaviour
     TMP_Text masterVolumeText;
     TMP_Text musicVolumeText;
     TMP_Text sfxVolumeText;
+    TMP_Text scoreText;
 
     [Header("GameObjects")]
     GameObject canvas;
@@ -107,6 +111,8 @@ public class UIManager : MonoBehaviour
 
         UpdateSliderText();
         settingsMenu.SetActive(false);
+
+        levelComplete = false;
     }
 
     // Update is called once per frame
@@ -125,6 +131,8 @@ public class UIManager : MonoBehaviour
             UpdateSpecialAmmo();
             UpdateAmmoType();
             UpdatePromt();
+            UpdateScore();
+            UpdateScoreText();
         }
     }
 
@@ -154,6 +162,7 @@ public class UIManager : MonoBehaviour
 
         deathMsgObj = canvas.transform.Find("UIMenus/DeathMsgPanel").gameObject;
         levelCompleteObj = canvas.transform.Find("UIMenus/LevelCompletePanel").gameObject;
+        scoreText = levelCompleteObj.transform.Find("ScoreText (TMP)").GetComponent<TextMeshProUGUI>();
         promtText = canvas.transform.Find("UIElements/PromtText (TMP)").gameObject;
         
         deathMsgObj.SetActive(false);
@@ -278,6 +287,20 @@ public class UIManager : MonoBehaviour
         sfxVolumeText.text = "60%";
     }
 
+    void UpdateScore()
+    {
+        int timeScore = 1000 + timeInMenu;
+        score = (int)(((health * 3 + specialAmmo * 2 + bananaAmount) * 10) + (timeScore - Time.realtimeSinceStartupAsDouble));
+    }
+
+    void UpdateScoreText()
+    {
+        if (!levelComplete)
+        {
+            scoreText.text = $"Score: {score}";
+        }
+    }
+
     #endregion
 
     #region Coroutines
@@ -318,6 +341,8 @@ public class UIManager : MonoBehaviour
 
     void HandleStartGame()
     {
+        timeInMenu = (int)Time.realtimeSinceStartup;
+
         canvas.SetActive(true);
         FindElements();
     }
@@ -330,6 +355,7 @@ public class UIManager : MonoBehaviour
     void HandleFinishGame()
     {
         levelCompleteObj.SetActive(true);
+        levelComplete = true;
     }
 
     #endregion
