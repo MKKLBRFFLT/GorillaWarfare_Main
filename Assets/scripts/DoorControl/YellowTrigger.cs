@@ -10,7 +10,7 @@ public class YellowTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            doorController.OpenDoor(); // Trigger the door to start moving down
+            doorController.CloseDoor(); // Trigger the door to start moving down
         }
     }
 }

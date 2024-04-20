@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class YellowGateControl : MonoBehaviour
 {
-    [SerializeField] private Transform endPoint; // The position where the door should stop moving
-    [SerializeField] private float moveSpeed = 20f;
+    [SerializeField] private Transform endPoint; 
+    [SerializeField] private float moveSpeed = 15f;
+    [SerializeField] private AudioSource audioSource;
 
-    private bool isOpening = false;
+
+    private bool isClosing = false;
 
     void Update()
     {
-        if (isOpening && transform.position.y > endPoint.position.y)
+        if (isClosing && transform.position.y > endPoint.position.y)
         {
-            // Move the door down towards the endpoint
+            
             transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
         }
     }
 
-    public void OpenDoor()
+    public void CloseDoor()
     {
-        isOpening = true;
+        isClosing = true;
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 }
