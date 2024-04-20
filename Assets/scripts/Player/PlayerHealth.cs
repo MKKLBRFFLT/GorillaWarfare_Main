@@ -177,8 +177,6 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(blinkTime * 2);
 
         StartCoroutine(Blink());
-
-        yield return new WaitForSeconds(blinkTime * 2);
     }
 
     IEnumerator Blink()
