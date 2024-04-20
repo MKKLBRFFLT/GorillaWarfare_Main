@@ -13,9 +13,11 @@ public class TurretHealth : MonoBehaviour
     [SerializeField] GameObject banana;
     [SerializeField] GameObject deathAnim;
 
+
     // Start is called before the first frame update
     void Start()
     {
+
         health = maxHealth;
     }
 
