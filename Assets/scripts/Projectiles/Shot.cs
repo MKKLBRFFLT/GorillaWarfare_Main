@@ -22,6 +22,14 @@ public class Shot : MonoBehaviour
         {
             tComp.TakeDamage(1);
         }
+        if (hitInfo.TryGetComponent<OmniTurretHealth>(out OmniTurretHealth oComp))
+        {
+            oComp.TakeDamage(1);
+        }
+        if (hitInfo.TryGetComponent<BatteryHealth>(out BatteryHealth bComp))
+        {
+            bComp.TakeDamage(1);
+        }
         if (hitInfo.TryGetComponent<RobotHealth>(out RobotHealth rComp))
         {
             rComp.TakeDamage(1);
