@@ -2717,30 +2717,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1999608787}
-    - target: {fileID: 205979945544215332, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 205979945544215332, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 638276900034709819, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 638276900034709819, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 638276900034709819, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 242.4064
-      objectReference: {fileID: 0}
-    - target: {fileID: 638276900034709819, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1216548269097814894, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2821,26 +2797,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1784425497132789068, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_text
-      value: 'Score: {0}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4672427071848920094, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4672427071848920094, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4672427071848920094, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 697.21924
-      objectReference: {fileID: 0}
-    - target: {fileID: 4672427071848920094, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4953191380422544738, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2853,10 +2809,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2059069291}
-    - target: {fileID: 8142903565767150083, guid: 88b42e96c8ee3294e904864bdff9029d, type: 3}
-      propertyPath: m_Name
-      value: ScoreText (TMP)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
