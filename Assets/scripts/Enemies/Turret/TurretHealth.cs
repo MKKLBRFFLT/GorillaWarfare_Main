@@ -11,6 +11,7 @@ public class TurretHealth : MonoBehaviour
     [Header("GameObjects")]
     [SerializeField] GameObject turret;
     [SerializeField] GameObject banana;
+    [SerializeField] GameObject deathAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class TurretHealth : MonoBehaviour
     {
         if (health <= 0)
         {
+            Instantiate(deathAnim, transform.position, Quaternion.identity);
             Instantiate(banana, transform.position, Quaternion.identity);
             Destroy(turret);
         }
