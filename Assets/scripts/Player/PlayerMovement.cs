@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private bool aimDown;
     bool jumping;
     bool running;
+    bool canJump;
 
     int material;
 
@@ -95,15 +96,27 @@ public class PlayerMovement : MonoBehaviour
         if (moveBool)
         {
             dirX = Input.GetAxisRaw("Horizontal");
+
+            
+            if (Mathf.Abs(dirX) > 0.5f)
+            {
+                dirX = Mathf.Sign(dirX); 
+            }
+            else
+            {
+                dirX = 0f;
+            }
+
             rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
             if (Input.GetButtonDown("Jump"))
             {
                 if (IsGrounded())
                 {
-                    StandUp();
-                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                     
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    aimUp = false; aimDown = false;
+
                     if (material == 1)
                     {
                         audioManager.PlayClip(jumpGroundStart2, "sfx");
@@ -128,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 jumping = false;
             }
-
+            /*
             if (Input.GetKeyDown(KeyCode.LeftControl) & IsGrounded())
             {
                 isCrouched = true;
@@ -137,7 +150,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 isCrouched = false;
             }
+            */
 
+            if (Input.GetButtonDown("Fire3") & IsGrounded())
+            {
+                isCrouched = true;
+            }
+            else if (Input.GetButtonUp("Fire3"))
+            {
+                isCrouched = false;
+            }
+
+            /*
             if (Input.GetKeyDown(KeyCode.W) & (dirX == 0))
             {
                 aimUp = true;
@@ -154,7 +178,31 @@ public class PlayerMovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.S))
             {
                 aimDown = false;
+            }*/
+
+
+            
+            float aimVertical = Input.GetAxisRaw("Vertical");
+            
+
+            if ((aimVertical > 0.5f) & (dirX == 0))
+            {
+                aimUp = true;
             }
+            else if (aimVertical < 0.5f)
+            {
+                aimUp = false;
+            }
+
+            if ((aimVertical < -0.5f) & (dirX == 0))
+            {
+                aimDown = true;
+            }
+            else if (aimVertical > -0.5f)
+            {
+                aimDown = false;
+            }
+
 
             UpdateAnimationState();
         }
@@ -262,6 +310,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator StartJump()
     {
         running = false;
+
+        
 
         yield return new WaitForSeconds(0.5f);
         jumping = true;
