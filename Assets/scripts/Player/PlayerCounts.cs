@@ -12,9 +12,11 @@ public class PlayerCounts : MonoBehaviour
     [Header("Ints")]
     public int bananaAmount;
     public int specialAmmo = 10;
+    public int keycardAmount;
 
     [Header("AudioClips")]
     [SerializeField] AudioClip bananaPickupAudio;
+    [SerializeField] AudioClip keycardPickupAudio;
 
     [Header("Components")]
     AudioManager audioManager;
@@ -26,11 +28,13 @@ public class PlayerCounts : MonoBehaviour
     void OnEnable()
     {
         banana.OnPickup += HandleBanana;
+        keycard.OnPickup += HandleKeycard;
     }
 
     void OnDisable()
     {
         banana.OnPickup -= HandleBanana;
+        keycard.OnPickup -= HandleKeycard;
     }
 
     #endregion
@@ -68,6 +72,11 @@ public class PlayerCounts : MonoBehaviour
     void HandleBanana()
     {
         audioManager.PlayClip(bananaPickupAudio, "sfx");
+    }
+
+    void HandleKeycard()
+    {
+        audioManager.PlayClip(keycardPickupAudio, "sfx");
     }
 
     #endregion

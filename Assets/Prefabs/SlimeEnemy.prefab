@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  banana: {fileID: 8959531023753936155, guid: 962d3bcd26ec97d419374b6769952857, type: 3}
+  banana: {fileID: 8959531023753936155, guid: 6f1eaa31e025f7a41b69981fa8275361, type: 3}
   deathAnim: {fileID: 4596850972537339403, guid: 37bf5413880a65f4592169e98de1c4b9, type: 3}
 --- !u!95 &5469365250936253679
 Animator:

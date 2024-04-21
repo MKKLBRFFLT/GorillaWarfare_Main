@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  banana: {fileID: 8959531023753936155, guid: 962d3bcd26ec97d419374b6769952857, type: 3}
+  banana: {fileID: 8959531023753936155, guid: 6f1eaa31e025f7a41b69981fa8275361, type: 3}
   deathAnimation: {fileID: 1632660326091975906, guid: d6144ac341871ef4abfa8e72f708637b, type: 3}
   robotHead: {fileID: 2188638992790039205, guid: 944d71430af86eb47a1dc54f8a0401a1, type: 3}
 --- !u!60 &2140051400423002474

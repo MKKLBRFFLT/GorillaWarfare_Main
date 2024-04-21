@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   turret: {fileID: 5753233617512968695}
-  banana: {fileID: 8959531023753936155, guid: 962d3bcd26ec97d419374b6769952857, type: 3}
+  banana: {fileID: 8959531023753936155, guid: 6f1eaa31e025f7a41b69981fa8275361, type: 3}
   deathAnim: {fileID: 1632660326091975906, guid: d6144ac341871ef4abfa8e72f708637b, type: 3}
 --- !u!1 &5076253650525384391
 GameObject:
