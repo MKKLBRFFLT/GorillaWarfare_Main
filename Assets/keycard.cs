@@ -10,11 +10,14 @@ public class keycard : MonoBehaviour
 
     public static event Action OnPickup;
 
+    RedGateControl doorController;
+
     private bool isMoving = false;
 
     void Start()
     {
-        
+        doorController = GameObject.FindWithTag("BossRoom").transform.Find("wall (1)/securitygate_vertical (1)").GetComponent<RedGateControl>();
+
         if (playerTransform == null)
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -49,6 +52,9 @@ public class keycard : MonoBehaviour
         {
             pComp.keycardAmount += 1;
             OnPickup?.Invoke();
+
+            doorController.OpenDoor(); // Trigger the door to start moving down
+            
             Destroy(gameObject);
         }
     }

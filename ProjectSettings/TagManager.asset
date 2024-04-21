@@ -19,6 +19,7 @@ TagManager:
   - SettingsMenu
   - Shop
   - Terrain
+  - BossRoom
   layers:
   - Default
   - TransparentFX

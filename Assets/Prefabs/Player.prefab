@@ -49,7 +49,9 @@ MonoBehaviour:
   aState: 0
   bananaAmount: 0
   specialAmmo: 3
+  keycardAmount: 0
   bananaPickupAudio: {fileID: 8300000, guid: 972166aecee0b694fab2ef90c88d60b3, type: 3}
+  keycardPickupAudio: {fileID: 8300000, guid: 14fe079c279ac4c40b8d91c6643e10a0, type: 3}
 --- !u!114 &1192679682336903759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,11 +462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 38545ecebe764e946bd388209e2322a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 38545ecebe764e946bd388209e2322a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.07
+      value: -3.73
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 38545ecebe764e946bd388209e2322a7, type: 3}
       propertyPath: m_LocalPosition.z
